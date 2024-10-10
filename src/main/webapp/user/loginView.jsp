@@ -30,29 +30,38 @@
 	<script type="text/javascript">
 
 		//============= "로그인"  Event 연결 =============
+		function fncLogin() {
+
+			var id=$("input:text").val();
+			var pw=$("input:password").val();
+			
+			if(id == null || id.length <1) {
+				alert('ID 를 입력하지 않으셨습니다.');
+				$("#userId").focus();
+				return;
+			}
+			
+			if(pw == null || pw.length <1) {
+				alert('패스워드를 입력하지 않으셨습니다.');
+				$("#password").focus();
+				return;
+			}
+			
+			$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
+
+		}
+		
 		$( function() {
 			
 			$("#userId").focus();
 			
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("button").on("click" , function() {
-				var id=$("input:text").val();
-				var pw=$("input:password").val();
-				
-				if(id == null || id.length <1) {
-					alert('ID 를 입력하지 않으셨습니다.');
-					$("#userId").focus();
-					return;
-				}
-				
-				if(pw == null || pw.length <1) {
-					alert('패스워드를 입력하지 않으셨습니다.');
-					$("#password").focus();
-					return;
-				}
-				
-				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
+			$("button").on('click', function() {
+				fncLogin();
 			});
+			
+			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			
+			
 		});	
 		
 		
@@ -61,6 +70,12 @@
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#' ]").on("click" , function() {
 				self.location = "/user/addUser"
+			});
+			
+			$(document).on("keydown", function(event) {
+				if (event.key == 'Enter') {
+					fncLogin();
+				}
 			});
 		});
 		

@@ -5,7 +5,7 @@
 
 <%@ include file="/common/import.jsp" %>
 
-<script type="text/javascript" src="/javascript/toolbar.js"></script>
+<script type="text/javascript" src="/javascript/jsp/toolbar.js"></script>
 <script type="text/javascript">
 	let user = ${user};
 </script>
@@ -19,26 +19,25 @@
 		
 		<%-- 三 토클 버튼 --%>
 		<div class="navbar-header">
+			
 		    <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#target">
 		    	<span class="sr-only">Toggle navigation</span>
 		    	<span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 			</button>
+			
 		</div>
 		
 		<!-- toolbar Navigation -->
 		
-		
 		<div class="collapse navbar-collapse" id="target" 
-	       	data-hover="dropdown" data-animations="fadeInDownNew fadeInRightNew fadeInUpNew fadeInLeftNew">
-	       	
+			data-hover="dropdown" data-animations="fadeInDownNew fadeInRightNew fadeInUpNew fadeInLeftNew">
 			
 			<ul class="nav navbar-nav">
 			
 				<li class="dropdown">
-				 	<a class="dropdown-toggle" 
-				 	data-toggle="dropdown" role="button" aria-expanded="false">
+				 	<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 				 		<span>상품 구매</span>
 				 		<span class="caret"></span>
 				 	</a>
@@ -55,8 +54,7 @@
 				
 				<c:if test="${!empty user }">	
 					<li class="dropdown">
-						<a class="dropdown-toggle" 
-						data-toggle="dropdown" role="button" aria-expanded="false">
+						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 							<span>회원 관리</span>
 							<span class="caret"></span>
 						</a>
@@ -71,8 +69,7 @@
 					 
 					<c:if test="${user.role == 'admin' }">
 				 		<li class="dropdown">
-							<a class="dropdown-toggle" 
-							data-toggle="dropdown" role="button" aria-expanded="false">
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 								<span>판매상품 관리</span>
 								<span class="caret"></span>
 							</a>

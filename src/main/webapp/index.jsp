@@ -18,7 +18,8 @@
 	
 	<body>
 	
-		<%@ include file="/layout/toolbar.jsp" %>
+<%-- 		<%@ include file="/layout/toolbar.jsp" %> --%>
+		<jsp:include page="/layout/toolbar.jsp" />
 		
 		
 	</body>
