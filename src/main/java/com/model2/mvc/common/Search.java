@@ -2,7 +2,10 @@ package com.model2.mvc.common;
 
 import javax.servlet.ServletContext;
 
-//==>리스트화면을 모델링(추상화/캡슐화)한 Bean 
+import lombok.ToString;
+
+//==>리스트화면을 모델링(추상화/캡슐화)한 Bean
+@ToString
 public class Search {
 	
 	///Field
@@ -26,6 +29,26 @@ public class Search {
 	private int searchPriceBigger;
 	private int searchPriceLess;
 	
+	/* 상품정렬에 대한 필드 */
+	private String orderByPrice;
+	private String orderByProdName;
+	
+	public String getOrderByPrice() {
+		return orderByPrice;
+	}
+
+	public void setOrderByPrice(String orderByPrice) {
+		this.orderByPrice = orderByPrice;
+	}
+
+	public String getOrderByProdName() {
+		return orderByProdName;
+	}
+
+	public void setOrderByProdName(String orderByProdName) {
+		this.orderByProdName = orderByProdName;
+	}
+
 	
 	///Constructor
 	public Search() {
@@ -123,12 +146,12 @@ public class Search {
 		this.desc = desc;
 	}
 
-	@Override
-	public String toString() {
-		return "Search [currentPage=" + currentPage + ", searchCondition="
-				+ searchCondition + ", searchKeyword=" + searchKeyword
-				+ ", pageSize=" + pageSize + ", endRowNum=" + getEndRowNum()
-				+ ", startRowNum=" + getStartRowNum() + ""
-				+ ", page=" + page + ", orderBy=" + orderBy +", desc=" + desc +" ]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Search [currentPage=" + currentPage + ", searchCondition="
+//				+ searchCondition + ", searchKeyword=" + searchKeyword
+//				+ ", pageSize=" + pageSize + ", endRowNum=" + getEndRowNum()
+//				+ ", startRowNum=" + getStartRowNum() + ""
+//				+ ", page=" + page + ", orderBy=" + orderBy +", desc=" + desc +" ]";
+//	}
 }

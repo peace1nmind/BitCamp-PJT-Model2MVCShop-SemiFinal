@@ -22,7 +22,6 @@ function toDateType(date) {
 	}
 }
 
-
 $(function() {
 	
 	$("#productPrice span").each(function() {

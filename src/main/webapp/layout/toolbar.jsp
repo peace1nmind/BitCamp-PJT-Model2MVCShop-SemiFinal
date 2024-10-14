@@ -5,10 +5,12 @@
 
 <%@ include file="/common/import.jsp" %>
 
-<script type="text/javascript" src="/javascript/jsp/toolbar.js"></script>
 <script type="text/javascript">
-	let user = ${user};
+	var userId = ${(user == null)? null : JSON.stringify(user)};
 </script>
+
+<script type="text/javascript" src="/javascript/jsp/toolbar.js"></script>
+
     
 <div class="navbar navbar-default navbar-fixed-top">
 

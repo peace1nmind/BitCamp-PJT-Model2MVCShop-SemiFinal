@@ -14,7 +14,7 @@ $(function() {
 					"로그인":"/user/login",
 					"로그아웃":"/user/logout",
 					"회원관리":`/user/getUser?userId=user.userId`,
-					"개인정보조회":`/user/getUser?userId=user.userId`,
+					"개인정보조회":`/user/getUser?userId=userId`,
 					"회원정보조회":"/user/listUser",
 					"상품구매":"/product/listProduct?menu=search",
 					"상품검색":"/product/listProduct?menu=search",

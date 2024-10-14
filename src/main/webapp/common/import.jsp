@@ -29,4 +29,6 @@
 
 <script type="text/javascript" src="/javascript/common.js"></script>
 
+<script type="text/javascript" src="/javascript_b/paging.js"></script>
+
 <link rel="stylesheet" href="/css/common.css" type="text/css">

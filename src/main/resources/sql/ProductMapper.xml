@@ -20,7 +20,7 @@
 	
 	<!-- selectProductList: 판매상품 리스트 -->
 	<select id="selectProductList"
-			parameterType="search"
+			parameterType="com.model2.mvc.common.Search"
 			resultMap="productSelectMap">
 			
 		SELECT
@@ -59,8 +59,9 @@
 		</where>
 		
 		<trim prefix="ORDER BY" prefixOverrides=",">
-			<if test="orderBy != null and orderBy != ''">${orderBy} <if test="desc">DESC</if></if>
-			, reg_date DESC NULLS LAST, prod_no 
+			<if test="orderByPrice != null and orderByPrice != ''">${orderByPrice},</if>
+			<if test="orderByProdName != null and orderByProdName != ''">${orderByProdName},</if>
+			reg_date DESC NULLS LAST, prod_no 
 		</trim>	
 		
 	</select>
