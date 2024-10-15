@@ -70,19 +70,11 @@ public class ProductController {
 	// Method
 	// 상품목록
 	@RequestMapping("/listProduct")
-	public String listProduct(@RequestParam("menu") String menu,
-							  @ModelAttribute("search") Search search,
+	public String listProduct(@ModelAttribute("search") Search search,
 							  @RequestParam(name = "salePage", required = false, defaultValue = "1") int salePage,
 							  Model model) throws Exception {
 		
 		System.out.println("/listProduct");
-		
-		// 상품 목록 / 상품 관리 구분 로직
-		// menu: search , manage
-		model.addAttribute("menu" ,menu);
-		model.addAttribute("title", (menu!=null && menu.equals("search"))? "상품 목록조회" : "상품관리 (판매전)");
-		model.addAttribute("navi", (menu!=null && menu.equals("search"))? "getProduct" : "updateProduct");
-		
 		
 		// 검색 조건을 다루는 로직
 		search.setPageSize(pageSize);
@@ -99,25 +91,36 @@ public class ProductController {
 		model.addAttribute("paging" ,paging);
 		
 		
-		/* 구매완료 상품들 (listSale) */
-		if (menu.equals("manage")) {
-			Search saleSearch = search;
-			saleSearch.setCurrentPage(salePage);
-			saleSearch.setPageSize(pageSize);
-			
-			System.out.println(String.format("\n\nsearch= %s \n\n", search));
-			System.out.println(String.format("\n\nsaleSearch=  %s \n\n", saleSearch));
-			
-			Map<String, Object> saleMap = purchaseService.getSaleList(saleSearch);
-			model.addAttribute("saleMap", saleMap);
-			
-			Paging salePaging = new Paging((int) saleMap.get("count"), saleSearch.getCurrentPage(), pageSize, pageUnit);
-			model.addAttribute("salePaging", salePaging);
-		}
+//		/* 구매완료 상품들 (listSale) */
+//		if (menu.equals("manage")) {
+//			Search saleSearch = search;
+//			saleSearch.setCurrentPage(salePage);
+//			saleSearch.setPageSize(pageSize);
+//			
+//			System.out.println(String.format("\n\nsearch= %s \n\n", search));
+//			System.out.println(String.format("\n\nsaleSearch=  %s \n\n", saleSearch));
+//			
+//			Map<String, Object> saleMap = purchaseService.getSaleList(saleSearch);
+//			model.addAttribute("saleMap", saleMap);
+//			
+//			Paging salePaging = new Paging((int) saleMap.get("count"), saleSearch.getCurrentPage(), pageSize, pageUnit);
+//			model.addAttribute("salePaging", salePaging);
+//		}
+//		
+//		model.addAttribute("tranCodeMap", TranCodeMapper.getInstance().getMap());
 		
-		model.addAttribute("tranCodeMap", TranCodeMapper.getInstance().getMap());
 		
 		return "/product/listProduct.jsp";
+	}
+	
+	
+	// 상품관리
+	@RequestMapping("/manageProduct")
+	public String manageProduct() {
+		
+		
+		
+		return "/product/manageProduct.jsp";
 	}
 	
 	
@@ -128,8 +131,6 @@ public class ProductController {
 							 HttpServletRequest request,
 							 HttpServletResponse response,
 							 Model model) throws NumberFormatException, Exception {
-		
-		System.out.println("/getProduct");
 		
 		// 상품정보를 가져오는 로직
 		model.addAttribute("product", productService.getProduct(Integer.parseInt(prodNo)));

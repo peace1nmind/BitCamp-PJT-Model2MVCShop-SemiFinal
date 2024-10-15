@@ -2,11 +2,6 @@
 
 $(function() {
 	
-	// Home
-	$(".navbar-brand").on('click', function() {
-		$(self.location).attr("href", "/");
-	});
-	
 	$(".navbar a").on('click', function() {
 		var text = $(this).text().replace(/\s/g, "");
 		
@@ -16,12 +11,13 @@ $(function() {
 					"회원관리":`/user/getUser?userId=user.userId`,
 					"개인정보조회":`/user/getUser?userId=userId`,
 					"회원정보조회":"/user/listUser",
-					"상품구매":"/product/listProduct?menu=search",
-					"상품검색":"/product/listProduct?menu=search",
+					"상품구매":"/product/listProduct",
+					"상품검색":"/product/listProduct",
 					"최근본상품":"/product/history",
 					"구매이력조회":"/purchase/listPurcahse",
 					"판매상품등록":"/product/addProduct",
-					"판매상품관리":"/product/listProduct?menu=manage"
+					"판매상품관리":"/product/manageProduct",
+					"Model2MVCShop":"/"
 					};
 					
 		let link = list[text];

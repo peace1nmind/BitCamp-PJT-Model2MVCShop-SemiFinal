@@ -86,11 +86,9 @@
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<%@ include file="/layout/toolbar.jsp" %>
-   		</div>
-   	</div>
+
+   	<jsp:include page="/layout/toolbar.jsp" />
+
    	<!-- ToolBar End /////////////////////////////////////-->	
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->

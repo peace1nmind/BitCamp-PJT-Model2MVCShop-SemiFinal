@@ -8,11 +8,11 @@
 	<head>
 
 		<meta charset="EUC-KR">
-		<title>Model2MVCShop-listProduct</title>
+		<title>Model2MVCShop-manageProduct</title>
 		
 		<%@ include file="/common/import.jsp" %>
 		
-		<script type="text/javascript" src="/javascript/jsp/listProduct.js"></script>
+		<script type="text/javascript" src="/javascript/jsp/manageProduct.js"></script>
 		
 		<style type="text/css">
 			.panel-body {font-weight: bold;}
@@ -41,6 +41,22 @@
 					
 							<div class="panel-heading">
 								상세 검색
+							</div>
+							
+							<div class="panel-body">
+								상품 상태 체크
+							</div>
+							
+							<div class="list-group">
+							
+								<li class="list-group-item">
+									<input type="checkbox" name="tranCode" value="1" ><span>판매중</span>
+									<input type="checkbox" name="tranCode" value="2" ><span>구매완료</span>
+									<input type="checkbox" name="tranCode" value="3" ><span>배송중</span>
+									<input type="checkbox" name="tranCode" value="4" ><span>배송완료</span>
+									<input type="checkbox" name="tranCode" value="5" ><span>판매완료</span>
+								</li>
+							
 							</div>
 							
 							<div class="panel-body">
@@ -145,6 +161,7 @@
 				
 				</div>
 				
+				
 				<div class="col-sm-9">
 					
 					<div class="page-header text-info">
@@ -165,7 +182,7 @@
 						    	<div class="caption">
 							        <h4>${ product.prodName }</h4>
 							        <p id="productPrice"><span>${ product.price }</span> 원</p>
-							        <p><a id="getProduct" class="btn btn-primary" role="button" data-prodno="${ product.prodNo }">정보보기</a></p>
+							        <p><a href="#" class="btn btn-primary" role="button">정보보기</a></p>
 						      	</div>
 						    </div>
 						    
@@ -177,9 +194,8 @@
 				
 			</div>
 			
-<%-- 			<%@ include file="../common/pagingNavigator_new.jsp" %> --%>
 			<jsp:include page="../common/pagingNavigator_new.jsp">
-				<jsp:param value="fncGetProductList" name="fnc"/>
+				<jsp:param value="fncGetManageProductList" name="fnc"/>
 			</jsp:include>
 			
 			</form>
