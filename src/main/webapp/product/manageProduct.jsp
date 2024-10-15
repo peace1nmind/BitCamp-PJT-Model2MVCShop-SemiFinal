@@ -50,11 +50,16 @@
 							<div class="list-group">
 							
 								<li class="list-group-item">
-									<input type="checkbox" name="tranCode" value="1" ><span>판매중</span>
-									<input type="checkbox" name="tranCode" value="2" ><span>구매완료</span>
-									<input type="checkbox" name="tranCode" value="3" ><span>배송중</span>
-									<input type="checkbox" name="tranCode" value="4" ><span>배송완료</span>
-									<input type="checkbox" name="tranCode" value="5" ><span>판매완료</span>
+									<div>
+										<input type="checkbox" name="tranCode" value="1" >&ensp;<span>판매중</span>
+									</div>
+										<input type="checkbox" name="tranCode" value="2" >&ensp;<span>구매완료</span>
+									<div>
+										<input type="checkbox" name="tranCode" value="3" >&ensp;<span>배송중</span>
+									</div>
+										<input type="checkbox" name="tranCode" value="4" >&ensp;<span>배송완료</span>
+									<div>
+										<input type="checkbox" name="tranCode" value="5" >&ensp;<span>판매완료</span></div>
 								</li>
 							
 							</div>

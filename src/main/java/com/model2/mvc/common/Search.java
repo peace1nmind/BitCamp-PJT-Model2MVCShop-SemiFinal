@@ -1,5 +1,9 @@
 package com.model2.mvc.common;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.servlet.ServletContext;
 
 import lombok.ToString;
@@ -48,7 +52,31 @@ public class Search {
 	public void setOrderByProdName(String orderByProdName) {
 		this.orderByProdName = orderByProdName;
 	}
+	
+	/* 상품관리 - tranCode */
+	private ArrayList<String> tranCode = new ArrayList<>(Arrays.asList("1"));;
+	
+	public ArrayList<String> getTranCode() {
+		return tranCode;
+	}
 
+	public void setTranCode(ArrayList<String> tranCode) {
+		
+		if (tranCode.isEmpty() || tranCode == null) {
+			this.tranCode.add("1");
+		} else {
+			this.tranCode = tranCode;
+		}
+		
+	}
+	
+//	public String[] getTranCode() {
+//		return tranCode;
+//	}
+//
+//	public void setTranCode(String[] tranCode) {
+//		this.tranCode = tranCode;
+//	}
 	
 	///Constructor
 	public Search() {

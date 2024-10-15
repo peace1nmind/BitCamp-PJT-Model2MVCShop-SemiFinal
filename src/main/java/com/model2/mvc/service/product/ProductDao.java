@@ -35,5 +35,10 @@ public interface ProductDao {
 	// service에서 tranCode 변경하여 product 넣게끔
 	public int updateProTranCode(Product product);
 	
+	// 상품 관리 리스트
+	public List<Product> selectManageProductList(Search search, RowBounds rowBounds);
+	
+	public int selectManageTotalCount(Search search);
+	
 }
 // class end

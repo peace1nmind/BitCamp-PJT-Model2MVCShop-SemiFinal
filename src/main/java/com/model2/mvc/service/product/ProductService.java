@@ -23,5 +23,8 @@ public interface ProductService {
 	// TranCode 변경 (1: 판매중, 2: 구매완료, 3: 배송중, 4: 배송완료)
 	public void updateTranCode(int prodNo, String proTranCode);
 	
+	// 상품 관리 리스트
+	public Map<String, Object> getManageProductList(Search search);
+	
 }
 // class end

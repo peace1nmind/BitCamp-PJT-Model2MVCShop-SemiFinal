@@ -72,5 +72,15 @@ public class ProductServiceImpl implements ProductService {
 		productDao.updateProTranCode(product);
 	}
 
+	@Override
+	public Map<String, Object> getManageProductList(Search search) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", productDao.selectManageProductList(search, getRowBounds(search)));
+		map.put("count", productDao.selectManageTotalCount(search));
+		
+		return map;
+	}
+
 }
 // class end

@@ -71,7 +71,7 @@ public class ProductController {
 	// 상품목록
 	@RequestMapping("/listProduct")
 	public String listProduct(@ModelAttribute("search") Search search,
-							  @RequestParam(name = "salePage", required = false, defaultValue = "1") int salePage,
+//							  @RequestParam(name = "salePage", required = false, defaultValue = "1") int salePage,
 							  Model model) throws Exception {
 		
 		System.out.println("/listProduct");
@@ -116,9 +116,18 @@ public class ProductController {
 	
 	// 상품관리
 	@RequestMapping("/manageProduct")
-	public String manageProduct() {
+	public String manageProduct(@ModelAttribute Search search,
+								Model model) {
 		
+		search.setPageSize(pageSize);
+		model.addAttribute("search", search);
 		
+		Map<String, Object> map = productService.getManageProductList(search);
+		model.addAttribute("map" ,map);
+		
+		// 페이지를 다루는 로직
+		Paging paging = new Paging((int) map.get("count"), search.getCurrentPage(), pageSize, pageUnit);
+		model.addAttribute("paging" ,paging);
 		
 		return "/product/manageProduct.jsp";
 	}

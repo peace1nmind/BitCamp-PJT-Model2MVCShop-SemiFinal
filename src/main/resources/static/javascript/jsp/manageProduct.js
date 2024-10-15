@@ -17,7 +17,7 @@ function fncGetManageProductList(page){
 
 $(function() {
 		
-	$("form").attr("action", "/product/listProduct").attr("method", "post");
+	$("form").attr("action", "/product/manageProduct").attr("method", "post");
 	
 	// 엔터 검색
 	$(document).on("keydown", function(event) {

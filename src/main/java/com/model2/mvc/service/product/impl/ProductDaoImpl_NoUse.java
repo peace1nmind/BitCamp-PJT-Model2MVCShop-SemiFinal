@@ -73,5 +73,17 @@ public class ProductDaoImpl_NoUse implements ProductDao {
 		return sqlSession.update("ProductMapper.updateTranCode", product);
 	}
 
+	@Override
+	public List<Product> selectManageProductList(Search search, RowBounds rowBounds) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int selectManageTotalCount(Search search) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
 // class end
