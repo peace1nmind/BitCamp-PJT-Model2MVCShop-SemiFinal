@@ -161,7 +161,7 @@
 		</where>
 		
 		<trim prefix="ORDER BY" prefixOverrides=",">
-			pro_tran_code DESC,
+			pro_tran_code,
 			<if test="orderByPrice != null and orderByPrice != ''">${orderByPrice},</if>
 			<if test="orderByProdName != null and orderByProdName != ''">${orderByProdName},</if>
 			reg_date DESC NULLS LAST, prod_no 
@@ -181,12 +181,13 @@
 				FROM product
 				
 				<where>
-					
-					pro_tran_code IN 
-			
-					<foreach item="code" collection="tranCode" open="(" separator="," close=")">
-						${code}
-					</foreach>
+				
+					<if test="tranCode != null and tranCode.size() > 0">
+					    pro_tran_code IN 
+					    <foreach item="code" collection="tranCode" open="(" separator="," close=")">
+					        ${code}
+					    </foreach>
+					</if>
 					
 					<if test="searchKeyword != null and searchKeyword != ''">
 						<choose>

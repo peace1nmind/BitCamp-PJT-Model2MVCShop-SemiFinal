@@ -65,7 +65,7 @@ public class PurchaseController {
 	// Method
 	// 구매이력 목록
 	@RequestMapping("/listPurchase")
-	public ModelAndView listPurchase(@RequestParam(required = false, defaultValue = "1") int page,
+	public ModelAndView listPurchase(@ModelAttribute Search search,
 									 @RequestParam(required = false, defaultValue = "1") int historyPage,
 									 @SessionAttribute("user") User buyer,
 									 HttpSession session) {
@@ -79,17 +79,20 @@ public class PurchaseController {
 		/* Interceptor로 변경 필요 */
 		if (buyer == null) {
 			modelAndView.setViewName("redirect:/user/login");
+			return modelAndView;
 		}
 		
 		
 		/* 구매이력에 관한 로직 */
-		Search search = new Search(page, pageSize);
+//		Search search = new Search(page, pageSize);
+		search.setPageSize(pageSize);
 		Map<String, Object> map = purchaseService.getPurchaseList(search, buyer.getUserId());
 		Paging paging = new Paging((int) map.get("count"), search.getCurrentPage(), pageSize, pageUnit);
 		
 		modelMap.put("map", map);
 		modelMap.put("paging", paging);
 		modelMap.put("tranCodeMap", TranCodeMapper.getInstance().getMap());
+		modelMap.put("search", search);
 		
 		
 		/* listPurchaseHistory 로직 */
@@ -99,6 +102,7 @@ public class PurchaseController {
 		
 		modelMap.put("historyMap", historyMap);
 		modelMap.put("historyPaging", historyPaging);
+		modelMap.put("historySearch", historySearch);
 		
 		modelAndView.setViewName("forward:/purchase/listPurchase.jsp");
 		modelAndView.addAllObjects(modelMap);
@@ -186,24 +190,30 @@ public class PurchaseController {
 	// 배송하기, 물건도착
 	// listSale (관리자)에서 배송하기 요청
 	@RequestMapping("updateTranCode")
-	public ModelAndView updateTranCode(@RequestParam int tranNo,
+	public ModelAndView updateTranCode(@RequestParam(required = false, defaultValue = "0") int tranNo,
+									   @RequestParam(required = false, defaultValue = "0") int prodNo,
+									   @ModelAttribute Search search,
 									   @RequestParam String tranCode) {
 		
-		System.out.println("/updateTranCode?tranNo="+tranNo);
+		System.out.println("/updateTranCode?"+((tranNo == 0)? "tranNo="+tranNo : "prodNo="+prodNo ));
 		
 		System.out.println(tranCode);
 		
+		if (tranNo == 0) {
+			tranNo = purchaseService.getPurchaseByProdNo(prodNo).getTranNo();
+		}
+		
 		ModelAndView modelAndView = new ModelAndView();
 		
-		if (tranCode.equals("3")) {	// 배송하기
-			modelAndView.setViewName("redirect:/product/listProduct?menu=manage");
+		if (tranCode.equals("3") || tranCode.equals("4")) {	// 배송하기, 물건도착
+			modelAndView.setViewName("redirect:/product/manageProduct");
 			
 			Purchase purchase = purchaseService.getPurchase(tranNo);
 			
 			purchaseService.updateTranCode(purchase, tranCode);
 			productService.updateTranCode(purchase.getPurchaseProd().getProdNo(), tranCode);
 			
-		} else if (tranCode.equals("4") || tranCode.equals("5")) {	// 물건도착, 구매확정
+		} else if (tranCode.equals("5")) {	// 구매확정
 			modelAndView.setViewName("redirect:/purchase/listPurchase");
 			
 			Purchase purchase = purchaseService.getPurchase(tranNo);
@@ -211,6 +221,8 @@ public class PurchaseController {
 			purchaseService.updateTranCode(tranNo, tranCode);
 			productService.updateTranCode(purchase.getPurchaseProd().getProdNo(), tranCode);
 		}
+		
+		modelAndView.addObject("search", search);
 		
 		return modelAndView;
 	}

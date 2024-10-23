@@ -1,4 +1,8 @@
 /* /layout/toobar.jsp */
+function historyPage(){
+	popWin = window.open("/product/history", "popWin", 
+						"left=300, top=200, width=400, height=400, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+}
 
 $(function() {
 	
@@ -14,7 +18,7 @@ $(function() {
 					"상품구매":"/product/listProduct",
 					"상품검색":"/product/listProduct",
 					"최근본상품":"/product/history",
-					"구매이력조회":"/purchase/listPurcahse",
+					"구매이력조회":"/purchase/listPurchase",
 					"판매상품등록":"/product/addProduct",
 					"판매상품관리":"/product/manageProduct",
 					"Model2MVCShop":"/"
@@ -27,6 +31,8 @@ $(function() {
 				if(confirm("로그아웃하시겠습니까?")) {
 					$(self.location).attr("href", link);
 				}
+			} else if (text=="최근본상품") {
+				historyPage();
 			} else {
 				$(self.location).attr("href", link);
 			}

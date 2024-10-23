@@ -49,6 +49,5 @@ $(function() {
 	
 	pageNavigate("paging", fncGetProductList);
 	
-	priceFormat();
-	
+	priceFormat()
 });

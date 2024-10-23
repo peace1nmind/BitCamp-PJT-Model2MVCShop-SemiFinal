@@ -194,21 +194,30 @@
 						<div class="col-sm-3">
 						
 							<div class="thumbnail">
-						    	<img src="/images/uploadFiles/${ product.fileName }" style="width: 172px; height: 180px;">
+						    	<img class="img-rounded" src="/images/uploadFiles/${ product.fileName }" style="width: 172px; height: 180px;">
 						    	<div class="caption">
 							        <h4>${ product.prodName }</h4>
 							        <p><span class="label label-${colorMap[product.proTranCode] }">${ tranCodeMap[product.proTranCode] }</span></p>
-							        <p><span id="productPrice">${ product.price }</span> 원</p>
+							        <p id="productPrice"><span>${ product.price }</span> 원</p>
 							        <p>
 							        	<button type="button" class="btn btn-primary btn-sm" 
 							        		data-href="${ (product.proTranCode == '1')? 'getProduct?menu=search&' : 'getPurchase?'}" data-prodno="${ product.prodNo }">
 							        		${ (product.proTranCode == "1")? "상품정보" : "구매정보" }
 						        		</button>
 						        		&ensp;
-						        		<button type="button" class="btn btn-primary btn-sm" 
-						        			data-href="${ (product.proTranCode == '1')? 'updateProduct?' : 'updatePurchase?'}" data-prodno="${ product.prodNo }">
-							        		정보수정
-						        		</button>
+						        		<c:if test="${ product.proTranCode == '2' }">
+							        		<button type="button" class="btn btn-primary btn-sm" 
+							        			data-href="/purchase/updateTranCode?tranCode=3&prodNo=${ product.prodNo }" data-prodno="${ product.prodNo }">
+								        		배송시작
+							        		</button>
+						        		</c:if>
+						        		
+						        		<c:if test="${ product.proTranCode == '3' }">
+							        		<button type="button" class="btn btn-primary btn-sm" 
+							        			data-href="/purchase/updateTranCode?tranCode=4&" data-prodno="${ product.prodNo }">
+								        		배송완료
+							        		</button>
+						        		</c:if>
 						        	</p>
 						      	</div>
 						    </div>
@@ -224,6 +233,7 @@
 						
 				<jsp:include page="../common/pagingNavigator_new.jsp">
 						<jsp:param value="fncGetManageProductList" name="fnc"/>
+						<jsp:param value="paging" name="paging"/>
 				</jsp:include>
 
 			</div>

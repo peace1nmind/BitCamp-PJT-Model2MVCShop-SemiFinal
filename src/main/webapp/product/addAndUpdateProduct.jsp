@@ -89,7 +89,7 @@
 		  			<label for="prodDetail">상품상세정보</label>
 		  		</div>
 				<div class="col-xs-8 col-md-4">
-					<textarea class="form-control" id="prodDetail" rows="3" placeholder="상품 상세정보를 입력해주세요." style="resize: none;">${ product.prodDetail }</textarea>
+					<textarea name="prodDetail" class="form-control" id="prodDetail" rows="3" placeholder="상품 상세정보를 입력해주세요." style="resize: none;">${ product.prodDetail }</textarea>
 					<span class="help-block">* 최대 200자</span>
 				</div>
 			</div>

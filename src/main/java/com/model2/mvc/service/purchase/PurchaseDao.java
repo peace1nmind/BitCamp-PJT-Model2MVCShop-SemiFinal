@@ -16,7 +16,7 @@ public interface PurchaseDao {
 	public Purchase selectPurchase(int tranNo);
 	
 	// prodNo로 구매정보 조회
-	public Purchase selectPurchaseByProd(int prodNo);
+	public Purchase selectPurchaseByProdNo(int prodNo);
 	
 	// 구매
 	public int insertPurchase(Purchase purchase);

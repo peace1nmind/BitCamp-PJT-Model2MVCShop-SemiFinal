@@ -6,6 +6,8 @@ function pageNavigate(tableId, fnc) {
 		var id = $(this).attr("id");
 		var page = $(this).data("page");
 		
+		console.log(tableId);
+		console.log(fnc);
 		console.log(id, page);
 		
 		switch (id) {

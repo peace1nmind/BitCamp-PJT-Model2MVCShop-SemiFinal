@@ -7,6 +7,8 @@ $(function() {
 		var text = $(this).text().replace(/\s/g, "");
 		var prodNo = $("#prodNo").text().replace(/\s/g, "");
 		
+		console.log(text);
+		
 		switch(text) {
 			case "수정":
 				$(self.location).attr("href", "/product/updateProduct?prodNo="+prodNo);
@@ -24,7 +26,7 @@ $(function() {
 				$(self.location).attr("href", "/product/manageProduct");
 				break;
 			
-			case "추가등록":
+			case "등록":
 				$(self.location).attr("href", "/product/addProduct");
 				break;
 		}

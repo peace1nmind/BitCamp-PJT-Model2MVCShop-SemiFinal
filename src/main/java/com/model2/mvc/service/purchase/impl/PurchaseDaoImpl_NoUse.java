@@ -45,7 +45,7 @@ public class PurchaseDaoImpl_NoUse implements PurchaseDao {
 	}
 
 	@Override
-	public Purchase selectPurchaseByProd(int prodNo) {
+	public Purchase selectPurchaseByProdNo(int prodNo) {
 		
 		Purchase purchase = sqlSession.selectOne("PurchaseMapper.selectPurchaseByProd", new Integer(prodNo));
 //		purchase.setPurchaseProd(sqlSession.selectOne("ProductMapper.selectProduct", purchase.getPurchaseProd().getProdNo()));

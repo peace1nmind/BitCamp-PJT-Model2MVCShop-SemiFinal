@@ -2,15 +2,16 @@
 <%@ page pageEncoding="EUC-KR"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript" src="/javascript/paging.js"></script>
 
-<script type="text/javascript">
-	$("#paging a").on('click', function() {
-		alert("aaaa");
-	});
-	
-</script>
- 
-<table id="paging">
+<c:set var="pagingName" value="${ param.paging }" />
+
+<c:if test="${ pagingName == 'historyPaging' }">
+	<c:set var="paging" value="${ historyPaging }"/>
+</c:if>
+
+<table id="${ pagingName }">
+
 <tr>
 <td>
 <div class="container text-center">

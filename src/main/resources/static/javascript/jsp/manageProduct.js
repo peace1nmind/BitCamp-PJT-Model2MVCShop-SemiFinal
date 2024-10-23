@@ -41,20 +41,16 @@ $(function() {
 		fncGetManageProductList(1);
 	});
 	
-//	$("#getProduct").on('click', function() {
-//		let prodNo = $(this).data("prodno");
-//		
-//		$(self.location).attr("href", "/product/getProdcut?menu=search&prodNo="+prodNo);
-//	});
-	
-	pageNavigate("paging", fncGetManageProductList);
 	
 	$("button.btn-sm").on('click', function() {
 		let link = $(this).data("href");
 		let prodNo = $(this).data("prodno");
 		
 		$(self.location).attr("href", link+"prodNo="+prodNo);
+		
 	});
 	
+
+	pageNavigate("paging", fncGetManageProductList);
 	priceFormat();
 });

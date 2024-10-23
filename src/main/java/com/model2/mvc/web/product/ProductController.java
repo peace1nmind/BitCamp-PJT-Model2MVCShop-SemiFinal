@@ -20,6 +20,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,8 +62,12 @@ public class ProductController {
 	@Value("${pageSize}")
 	int pageSize;
 	
+	@Value("${listSize}")
+	int listSize;
+	
 	@Value("${uploadDir}")
 	String uploadDir;
+	
 
 	// Constructor
 	public ProductController() {
@@ -77,7 +84,7 @@ public class ProductController {
 		System.out.println("/listProduct");
 		
 		// 검색 조건을 다루는 로직
-		search.setPageSize(pageSize);
+		search.setPageSize(listSize);
 		model.addAttribute("search", search);
 		
 		
@@ -87,7 +94,7 @@ public class ProductController {
 		model.addAttribute("map" ,map);
 		
 		// 페이지를 다루는 로직
-		Paging paging = new Paging((int) map.get("count"), search.getCurrentPage(), pageSize, pageUnit);
+		Paging paging = new Paging((int) map.get("count"), search.getCurrentPage(), listSize, pageUnit);
 		model.addAttribute("paging" ,paging);
 		
 		
@@ -119,14 +126,14 @@ public class ProductController {
 	public String manageProduct(@ModelAttribute Search search,
 								Model model) {
 		
-		search.setPageSize(pageSize);
+		search.setPageSize(listSize);
 		model.addAttribute("search", search);
 		
 		Map<String, Object> map = productService.getManageProductList(search);
 		model.addAttribute("map" ,map);
 		
 		// 페이지를 다루는 로직
-		Paging paging = new Paging((int) map.get("count"), search.getCurrentPage(), pageSize, pageUnit);
+		Paging paging = new Paging((int) map.get("count"), search.getCurrentPage(), listSize, pageUnit);
 		model.addAttribute("paging" ,paging);
 		
 		model.addAttribute("tranCodeMap", TranCodeMapper.getInstance().getMap());
@@ -228,8 +235,7 @@ public class ProductController {
 			String fileExtension = product.getFileName().substring(product.getFileName().lastIndexOf("."));
 			String uploadFileName = uuid + fileExtension;
 			
-			product.getFile().transferTo(new File(uploadDir + uploadFileName));
-			Thread.sleep(2000);
+			product.getFile().transferTo(new File(uploadDir + uploadFileName));			
 			
 			product.setFileName(uploadFileName);
 			
@@ -239,9 +245,11 @@ public class ProductController {
 		} 
 		
 		product = productService.updateProduct(product);
+		
 		model.addAttribute("product", product);
 		
 		model.addAttribute("menu", "manage");
+		model.addAttribute("fnc", "update");
 		
 		return "/product/getProduct.jsp";
 	}
@@ -273,7 +281,6 @@ public class ProductController {
 			System.out.println("업로드할 디렉토리 : "+uploadDir);
 			System.out.println("\n");
 			File uploadFile = new File(uploadDir+uploadFileName);
-			Thread.sleep(2000);
 			
 			try {
 				product.getFile().transferTo(uploadFile);
@@ -290,7 +297,11 @@ public class ProductController {
 		}
 		
 		product = productService.addProduct(product);
+		
 		model.addAttribute("product", product);
+		
+		model.addAttribute("menu", "manage");
+		model.addAttribute("fnc", "add");
 		
 		return "/product/getProduct.jsp";
 	}

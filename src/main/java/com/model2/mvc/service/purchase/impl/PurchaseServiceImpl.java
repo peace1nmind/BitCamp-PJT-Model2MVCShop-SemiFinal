@@ -46,7 +46,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 		
 		try {
 			purchaseDao.insertPurchase(purchase);
-			purchase = purchaseDao.selectPurchaseByProd(purchase.getPurchaseProd().getProdNo());
+			purchase = purchaseDao.selectPurchaseByProdNo(purchase.getPurchaseProd().getProdNo());
 			productService.updateTranCode(purchase.getPurchaseProd().getProdNo(), "2");
 			
 		} catch (Exception e) {
@@ -74,12 +74,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 	
 	@Override
-	public Purchase getPurchaseByProd(int prodNo) {
+	public Purchase getPurchaseByProdNo(int prodNo) {
 		
 		Purchase purchase = new Purchase();
 		
 		try {
-			purchase = purchaseDao.selectPurchaseByProd(prodNo);
+			purchase = purchaseDao.selectPurchaseByProdNo(prodNo);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

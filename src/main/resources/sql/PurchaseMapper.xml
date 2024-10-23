@@ -43,8 +43,8 @@
 	</select>
 	
 	
-	<!-- selectPurchaseByProd: prodNo로 구매정보 조회 -->
-	<select id="selectPurchaseByProd"
+	<!-- selectPurchaseByProdNo: prodNo로 구매정보 조회 -->
+	<select id="selectPurchaseByProdNo"
 			resultMap="purchaseSelectMap">
 	
 		SELECT
@@ -120,7 +120,7 @@
 		FROM transaction
 		WHERE buyer_id = #{buyerId}
 		AND tran_status_code &gt;= 4
-		ORDER BY order_date DESC
+		ORDER BY tran_status_code, order_date DESC
 					
 	</select>
 	

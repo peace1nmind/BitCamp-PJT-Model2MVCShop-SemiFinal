@@ -67,7 +67,7 @@
 			
 			<div class="row">
 		  		<div class="col-xs-4 col-md-2 "><strong>가격</strong></div>
-				<div class="col-xs-8 col-md-4"><span id="price">${ product.price }</span> 원</div>
+				<div class="col-xs-8 col-md-4" id="productPrice"><span>${ product.price }</span> 원</div>
 			</div>
 			
 			<hr/>
@@ -101,9 +101,20 @@
 		  			</c:if>
 		  			
 		  			<c:if test="${ menu == 'manage' }">
-		  			
+		  				
+		  				<c:choose>
+		  				
+		  					<c:when test="${ fnc == 'add' }">
+		  						<button type="button" class="btn btn-primary">등록</button>
+		  					</c:when>
+		  					
+		  					<c:when test="${ fnc == 'update' }">
+		  						<button type="button" class="btn btn-primary">수정</button>
+		  					</c:when>
+		  				
+		  				</c:choose>
+		  				
 		  				<button type="button" class="btn btn-primary">확인</button>
-		  				<button type="button" class="btn btn-primary">추가등록</button>
 		  				
 		  			</c:if>
 		  			

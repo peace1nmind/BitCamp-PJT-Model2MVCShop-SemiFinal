@@ -1,10 +1,11 @@
 package com.model2.mvc.common;
 
-import java.sql.Array;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import javax.servlet.ServletContext;
+import java.util.Date;
 
 import lombok.ToString;
 
@@ -25,8 +26,6 @@ public class Search {
 	private int startRowNum;
 	
 	/* 개인추가항목 */
-	private String orderBy;		// ORDER BY 항목
-	private boolean desc;		// DESC 여부(ture: DESC, false: ASC)
 	int page = 1;
 	
 	/* 범위검색을 위한 필드 */
@@ -70,20 +69,41 @@ public class Search {
 		
 	}
 	
-//	public String[] getTranCode() {
-//		return tranCode;
-//	}
-//
-//	public void setTranCode(String[] tranCode) {
-//		this.tranCode = tranCode;
-//	}
+	/* 구매이력 날짜 */
+	private String startDate;
+	private String endDate;
+	
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+	
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
 	
 	///Constructor
 	public Search() {
+		System.out.println("new "+getClass().getSimpleName()+" Constructor");
+		
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		LocalDate today = LocalDate.now();
+		
+		// starDate는 한달전, endDate는 오늘
+		startDate = (today.minusMonths(1)).format(dateFormat);
+		endDate = today.format(dateFormat);
 	}
 	
 	public Search(int currentPage, int pageSize) {
-		super();
+		this();
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;
 	}
@@ -157,29 +177,5 @@ public class Search {
 	public int getStartRowNum() {
 		return (getCurrentPage()-1)*getPageSize();
 	}
-	
-	public String getOrderBy() {
-		return orderBy;
-	}
 
-	public void setOrderBy(String orderBy) {
-		this.orderBy = orderBy;
-	}
-
-	public boolean isDesc() {
-		return desc;
-	}
-
-	public void setDesc(boolean desc) {
-		this.desc = desc;
-	}
-
-//	@Override
-//	public String toString() {
-//		return "Search [currentPage=" + currentPage + ", searchCondition="
-//				+ searchCondition + ", searchKeyword=" + searchKeyword
-//				+ ", pageSize=" + pageSize + ", endRowNum=" + getEndRowNum()
-//				+ ", startRowNum=" + getStartRowNum() + ""
-//				+ ", page=" + page + ", orderBy=" + orderBy +", desc=" + desc +" ]";
-//	}
 }
