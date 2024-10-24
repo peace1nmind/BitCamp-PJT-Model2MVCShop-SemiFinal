@@ -17,8 +17,10 @@
 	</head>
 
 	<body>
-	
-		<jsp:include page="/layout/toolbar.jsp" />
+		
+		<c:if test="${ menu != 'pop' }">
+			<jsp:include page="/layout/toolbar.jsp" />
+		</c:if>
 		
 		<div class="container">
 		
@@ -90,7 +92,7 @@
 		  						<button type="button" class="btn btn-primary">수정</button>
 		  					</c:when>
 		  					
-		  					<c:when test="${ user.role == 'user' && product.proTranCode == '1' }">
+		  					<c:when test="${ user.role != 'admin' && product.proTranCode == '1' }">
 		  						<button type="button" class="btn btn-primary">구매</button>
 		  					</c:when>
 		  					

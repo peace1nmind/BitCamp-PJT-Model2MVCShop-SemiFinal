@@ -29,7 +29,7 @@ CREATE TABLE product (
 	prod_no 					NUMBER 				NOT NULL,
 	prod_name 				VARCHAR2(100) 	NOT NULL,
 	prod_detail 				VARCHAR2(200),
-	manufacture_day	VARCHAR2(10),
+	manufacture_day DATE,
 	price 							NUMBER(10),
 	image_file 					VARCHAR2(100),
 	reg_date 					DATE,
@@ -138,27 +138,110 @@ insert into product values (seq_product_prod_no.nextval,'보드세트','한시즌 밖에 
 insert into product values (seq_product_prod_no.nextval,'인라인','좋아욥','20120819', 20000, 'AHlbAAAAve37LwAD.jpg',to_date('2012/11/14 10:51:40', 'YYYY/MM/DD HH24:MI:SS'), '1');
 insert into product values (seq_product_prod_no.nextval,'삼성센스 2G','sens 메모리 2Giga','20121121',800000, 'AHlbAAAAtBqyWAAA.jpg',to_date('2012/11/14 18:46:58', 'YYYY/MM/DD HH24:MI:SS'), '1');
 insert into product values (seq_product_prod_no.nextval,'연꽃','정원을 가꿔보세요','20121022',232300, 'AHlbAAAAtDPSiQAA.jpg',to_date('2012/11/15 17:39:01', 'YYYY/MM/DD HH24:MI:SS'), '1');
-insert into product values (seq_product_prod_no.nextval,'삼성센스','노트북','20120212',600000, 'AHlbAAAAug1vsgAA.jpg',to_date('2012/11/12 13:04:31', 'YYYY/MM/DD HH24:MI:SS'), '1');
 
 
 commit;
 
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct01', 1111);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct02', 2222);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct03', 3333);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct04', 4444);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct05', 5555);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct06', 6666);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct07', 7777);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct08', 8888);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct09', 9999);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct10', 1010);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct11', 1111);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct12', 1212);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct13', 1313);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct14', 1414);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct15', 1515);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct16', 1616);
-INSERT INTO product(prod_no, prod_name, price) VALUES(seq_product_prod_no.NEXTVAL, 'testProduct17', 1717);
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 1', 'Detail 1', '20230101', 1000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 2', 'Detail 2', '20230102', 2000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 3', 'Detail 3', '20230103', 3000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 4', 'Detail 4', '20230104', 4000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 5', 'Detail 5', '20230105', 5000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 6', 'Detail 6', '20230106', 6000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 7', 'Detail 7', '20230107', 7000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 8', 'Detail 8', '20230108', 8000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 9', 'Detail 9', '20230109', 9000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 10', 'Detail 10', '20230110', 10000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 11', 'Detail 11', '20230111', 11000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 12', 'Detail 12', '20230112', 12000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 13', 'Detail 13', '20230113', 13000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 14', 'Detail 14', '20230114', 14000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 15', 'Detail 15', '20230115', 15000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 16', 'Detail 16', '20230116', 16000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 17', 'Detail 17', '20230117', 17000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 18', 'Detail 18', '20230118', 18000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 19', 'Detail 19', '20230119', 19000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 20', 'Detail 20', '20230120', 20000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 21', 'Detail 21', '20230121', 21000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 22', 'Detail 22', '20230122', 22000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 23', 'Detail 23', '20230123', 23000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 24', 'Detail 24', '20230124', 24000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 25', 'Detail 25', '20230125', 25000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 26', 'Detail 26', '20230126', 26000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 27', 'Detail 27', '20230127', 27000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 28', 'Detail 28', '20230128', 28000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 29', 'Detail 29', '20230129', 29000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 30', 'Detail 30', '20230130', 30000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 31', 'Detail 31', '20230131', 31000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 32', 'Detail 32', '20230132', 32000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 33', 'Detail 33', '20230133', 33000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 34', 'Detail 34', '20230134', 34000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 35', 'Detail 35', '20230135', 35000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 36', 'Detail 36', '20230136', 36000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 37', 'Detail 37', '20230137', 37000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 38', 'Detail 38', '20230138', 38000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 39', 'Detail 39', '20230139', 39000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 40', 'Detail 40', '20230140', 40000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 41', 'Detail 41', '20230141', 41000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 42', 'Detail 42', '20230142', 42000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 43', 'Detail 43', '20230143', 43000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 44', 'Detail 44', '20230144', 44000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 45', 'Detail 45', '20230145', 45000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 46', 'Detail 46', '20230146', 46000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 47', 'Detail 47', '20230147', 47000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 48', 'Detail 48', '20230148', 48000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 49', 'Detail 49', '20230149', 49000, 'test.png', SYSDATE - TRUNC(DBMS_RANDOM.VALUE(1, 365)), '1');
+INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code) 
+VALUES (seq_product_prod_no.nextval, 'Product 50', 'Detail 50', '20230150', 50000, 'test.png', SYSDATE - TR
+
 
 COMMIT;

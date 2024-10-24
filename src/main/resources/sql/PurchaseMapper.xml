@@ -94,7 +94,7 @@
 			t.prod_no = p.prod_no
 			AND t.buyer_id = #{buyerId}
 			AND t.tran_status_code BETWEEN 2 AND 3
-			AND t.order_date BETWEEN #{search.startDate} AND #{search.endDate}
+			AND TO_CHAR(t.order_date, 'yyyy-MM-DD') BETWEEN #{search.startDate} AND #{search.endDate}
 			
 			<if test="search.searchKeyword != null and search.searchKeyword != ''">
 				<choose>
@@ -141,7 +141,8 @@
 					t.prod_no = p.prod_no
 					AND t.buyer_id = #{buyerId}
 					AND t.tran_status_code BETWEEN 2 AND 3
-					AND t.order_date BETWEEN #{search.startDate} AND #{search.endDate}
+					AND TO_CHAR(t.order_date, 'yyyy-MM-DD') BETWEEN #{search.startDate} AND #{search.endDate}
+					OR t.order_date= #{search.endDate}
 					
 					<if test="search.searchKeyword != null and search.searchKeyword != ''">
 						<choose>
@@ -186,7 +187,7 @@
 			t.prod_no = p.prod_no
 			AND t.buyer_id = #{buyerId}
 			AND tran_status_code &gt;= 4
-			AND t.order_date BETWEEN #{search.startDate} AND #{search.endDate}
+			AND TO_CHAR(t.order_date, 'yyyy-MM-DD') BETWEEN #{search.startDate} AND #{search.endDate}
 			
 			<if test="search.searchKeyword != null and search.searchKeyword != ''">
 				<choose>
@@ -233,7 +234,7 @@
 					t.prod_no = p.prod_no
 					AND t.buyer_id = #{buyerId}
 					AND tran_status_code &gt;= 4
-					AND t.order_date BETWEEN #{search.startDate} AND #{search.endDate}
+					AND TO_CHAR(t.order_date, 'yyyy-MM-DD') BETWEEN #{search.startDate} AND #{search.endDate}
 					
 					<if test="search.searchKeyword != null and search.searchKeyword != ''">
 						<choose>

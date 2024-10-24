@@ -53,23 +53,23 @@
 								<li class="list-group-item">
 									<div>
 										<label>
-											<input type="checkbox" name="tranCode" value="1" ${ search.tranCode.contains("1")? "checked" : "" } >&ensp;<span>판매중</span>
+											<input type="checkbox" name="tranCodes" value="1" ${ search.tranCodes.contains("1")? "checked" : "" } >&ensp;<span>판매중</span>
 										</label>
 									</div>
 										<label>
-											<input type="checkbox" name="tranCode" value="2" ${ search.tranCode.contains("2")? "checked" : "" }>&ensp;<span>구매완료</span>
+											<input type="checkbox" name="tranCodes" value="2" ${ search.tranCodes.contains("2")? "checked" : "" }>&ensp;<span>구매완료</span>
 										</label>
 									<div>
 										<label>
-											<input type="checkbox" name="tranCode" value="3" ${ search.tranCode.contains("3")? "checked" : "" }>&ensp;<span>배송중</span>
+											<input type="checkbox" name="tranCodes" value="3" ${ search.tranCodes.contains("3")? "checked" : "" }>&ensp;<span>배송중</span>
 										</label>
 									</div>
 										<label>
-											<input type="checkbox" name="tranCode" value="4" ${ search.tranCode.contains("4")? "checked" : "" }>&ensp;<span>배송완료</span>
+											<input type="checkbox" name="tranCodes" value="4" ${ search.tranCodes.contains("4")? "checked" : "" }>&ensp;<span>배송완료</span>
 										</label>
 									<div>
 									<label>
-										<input type="checkbox" name="tranCode" value="5" ${ search.tranCode.contains("5")? "checked" : "" }>&ensp;<span>판매완료</span></div>
+										<input type="checkbox" name="tranCodes" value="5" ${ search.tranCodes.contains("5")? "checked" : "" }>&ensp;<span>판매완료</span></div>
 									</label>
 								</li>
 							
@@ -201,22 +201,23 @@
 							        <p id="productPrice"><span>${ product.price }</span> 원</p>
 							        <p>
 							        	<button type="button" class="btn btn-primary btn-sm" 
-							        		data-href="${ (product.proTranCode == '1')? 'getProduct?menu=search&' : 'getPurchase?'}" data-prodno="${ product.prodNo }">
+							        		data-href="${ (product.proTranCode == '1')? '/product/getProduct?menu=search&' : '/purchase/getPurchase?'}" data-prodno="${ product.prodNo }">
 							        		${ (product.proTranCode == "1")? "상품정보" : "구매정보" }
 						        		</button>
 						        		&ensp;
 						        		<c:if test="${ product.proTranCode == '2' }">
 							        		<button type="button" class="btn btn-primary btn-sm" 
-							        			data-href="/purchase/updateTranCode?tranCode=3&prodNo=${ product.prodNo }" data-prodno="${ product.prodNo }">
+							        			data-href="/purchase/updateTranCode" data-prodno="${ product.prodNo }" data-trancode="3">
 								        		배송시작
 							        		</button>
 						        		</c:if>
 						        		
 						        		<c:if test="${ product.proTranCode == '3' }">
 							        		<button type="button" class="btn btn-primary btn-sm" 
-							        			data-href="/purchase/updateTranCode?tranCode=4&" data-prodno="${ product.prodNo }">
+							        			data-href="/purchase/updateTranCode" data-prodno="${ product.prodNo }" data-trancode="4">
 								        		배송완료
 							        		</button>
+							        		
 						        		</c:if>
 						        	</p>
 						      	</div>
@@ -227,7 +228,8 @@
 				    </c:forEach>
 					</div>
 					
-					
+					<input type="hidden" name="prodNo" value="">
+	        		<input type="hidden" name="tranCode" value="">
 					
 				</div>
 						

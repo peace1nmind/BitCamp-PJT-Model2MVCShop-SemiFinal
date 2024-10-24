@@ -53,18 +53,18 @@ public class Search implements Cloneable {
 	}
 	
 	/* 상품관리 - tranCode */
-	private ArrayList<String> tranCode = new ArrayList<>(Arrays.asList("1"));;
+	private ArrayList<String> tranCodes = new ArrayList<>(Arrays.asList("1"));;
 	
-	public ArrayList<String> getTranCode() {
-		return tranCode;
+	public ArrayList<String> getTranCodes() {
+		return tranCodes;
 	}
 
-	public void setTranCode(ArrayList<String> tranCode) {
+	public void setTranCodes(ArrayList<String> tranCodes) {
 		
-		if (tranCode.isEmpty() || tranCode == null) {
-			this.tranCode.add("1");
+		if (tranCodes.isEmpty() || tranCodes == null) {
+			this.tranCodes.add("1");
 		} else {
-			this.tranCode = tranCode;
+			this.tranCodes = tranCodes;
 		}
 		
 	}
@@ -185,7 +185,7 @@ public class Search implements Cloneable {
             Search cloned = (Search) super.clone();
 
             // 참조 타입인 ArrayList는 깊은 복사를 수행
-            cloned.tranCode = new ArrayList<>(this.tranCode);
+            cloned.tranCodes = new ArrayList<>(this.tranCodes);
 
             return cloned;
         } catch (CloneNotSupportedException e) {

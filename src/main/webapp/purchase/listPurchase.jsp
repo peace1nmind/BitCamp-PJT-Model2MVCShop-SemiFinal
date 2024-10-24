@@ -17,6 +17,8 @@
 		<style type="text/css">
 			.panel-body {font-weight: bold;}
 			a#prodName {color: #000000;}
+			.prodName {width: 15%;}
+			.no {width: 2%;}
 		</style>
 
 	</head>
@@ -177,13 +179,13 @@
 					<!-- 구매이력 리스트 시작 -->
 					<table class="table">
 						<tr class="active">
-							<th>No.</th>
-							<th style="width: 200px;">상품명</th>
+							<th class="no">No.</th>
+							<th class="prodName">상품명</th>
 							<th>가격</th>
 							<th>구매일자</th>
 							<th>배송희망일</th>
 							<th>배송현황</th>
-							<th>정보수정</th>
+							<th>&nbsp;</th>
 						</tr>
 						
 						<c:forEach items="${map.list}" var="purchase" varStatus="status">
@@ -199,9 +201,9 @@
 								<td>
 										
 									<%-- 정보수정 : 배송완료전이면 배송지 수정하게끔 **4=배송완료 --%>
-									<c:if test="${ purchase.tranCode == 2 }">>
-										<a class="updatePurchase" data-tranno="${ purchase.tranNo }">배송정보 수정</a>
-									</c:if>
+									
+									<a class="getPurchase" data-tranno="${ purchase.tranNo }">배송정보 확인</a>
+									
 	
 								</td>
 							</tr>
@@ -232,13 +234,13 @@
 					<table class="table">
 						<%-- 리스트 설정 --%>
 						<tr class="active">
-							<th>No.</th>
-							<th style="width: 200px;">상품명</th>
+							<th class="no">No.</th>
+							<th class="prodName">상품명</th>
+							<th>가격</th>
 							<th>받는 사람</th>
 							<th>구매일자</th>
 							<th>배송희망일</th>
 							<th>배송현황</th>
-							<th>구매확정</th>
 						</tr>
 						
 						<c:forEach items="${historyMap.list}" var="purchase" varStatus="status">
@@ -246,15 +248,21 @@
 							
 							<tr>
 								<th>${ status.count }</th>
-								<td><a id="prodName" data-prodno="${ product.prodNo }">${ product.prodName }</a></td>
+								<td><a id="prodName" data-tranno="${ purchase.tranNo }">${ product.prodName }</a></td>
+								<td id="productPrice"><span>${ product.price }</span> 원</td>
 								<td>${ purchase.receiverName }</td>
 								<td>${ purchase.orderDate }</td>
 								<td>${ purchase.dlvyDate }</td>
-								<td>${ tranCodeMap[purchase.tranCode] }</td>
 								<td>
-									<c:if test="${purchase.tranCode=='4' }">
-										<a class="updateTranCode" data-tranno="${purchase.tranNo }" data-trancode="5">구매확정</a>
-									</c:if>
+									<c:choose>
+										<c:when test="${purchase.tranCode=='4' }">
+											<a class="updateTranCode" data-tranno="${purchase.tranNo }" data-trancode="5">구매확정</a>
+										</c:when>
+										
+										<c:otherwise>
+											${ tranCodeMap[purchase.tranCode] }
+										</c:otherwise>
+									</c:choose>
 								</td>
 							</tr>
 					    </c:forEach>

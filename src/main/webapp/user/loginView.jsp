@@ -28,6 +28,16 @@
     
     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
+	
+		$(function() {
+			
+			let message = $("input[name='message']").val().trim();;
+
+			if (message != "") {
+				alert(message);
+			}
+			
+		});
 
 		//============= "로그인"  Event 연결 =============
 		function fncLogin() {
@@ -88,6 +98,8 @@
 	<!-- ToolBar Start /////////////////////////////////////-->
 
    	<jsp:include page="/layout/toolbar.jsp" />
+   	
+   	<input type="hidden" name="message" value="${ (empty message)? '' : message }">
 
    	<!-- ToolBar End /////////////////////////////////////-->	
 	

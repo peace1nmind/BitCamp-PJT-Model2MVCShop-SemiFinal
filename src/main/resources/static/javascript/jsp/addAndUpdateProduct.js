@@ -24,6 +24,12 @@ function productCheck(fnc){
 		alert("가격은 반드시 입력하셔야 합니다.");
 		return;
 	}
+	
+	if (manuDate > getToday()) {
+		alert("제조일을 잘못입력하였습니다.");
+		$("input[name='manuDate']").val(getToday());
+		return;
+	}
 
 	switch(fnc) {
 		case "add":

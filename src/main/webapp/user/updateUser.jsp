@@ -77,6 +77,8 @@
 				alert("이름은  반드시 입력하셔야 합니다.");
 				return;
 			}
+			
+			
 				
 			var value = "";	
 			if( $("input[name='phone2']").val() != ""  &&  $("input[name='phone3']").val() != "") {

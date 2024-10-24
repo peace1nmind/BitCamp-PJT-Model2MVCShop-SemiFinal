@@ -2,8 +2,11 @@ package com.model2.mvc.service.domain;
 
 import java.sql.Date;
 
+import lombok.ToString;
+
 
 //==>회원정보를 모델링(추상화/캡슐화)한 Bean
+@ToString
 public class User {
 	
 	///Field
@@ -117,11 +120,11 @@ public class User {
 		return phone3;
 	}
 
-	@Override
-	public String toString() {
-		return "UserVO : [userId] "+userId+" [userName] "+userName+" [password] "+password+" [role] "+ role
-			+" [ssn] "+ssn+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate;
-	}
+//	@Override
+//	public String toString() {
+//		return "UserVO : [userId] "+userId+" [userName] "+userName+" [password] "+password+" [role] "+ role
+//			+" [ssn] "+ssn+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate;
+//	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////
 	// JSON ==> Domain Object  Binding을 위해 추가된 부분

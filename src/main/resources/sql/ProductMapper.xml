@@ -61,7 +61,7 @@
 		<trim prefix="ORDER BY" prefixOverrides=",">
 			<if test="orderByPrice != null and orderByPrice != ''">${orderByPrice},</if>
 			<if test="orderByProdName != null and orderByProdName != ''">${orderByProdName},</if>
-			reg_date DESC NULLS LAST, prod_no 
+			prod_no, reg_date DESC NULLS LAST, prod_no 
 		</trim>	
 		
 	</select>
@@ -124,9 +124,9 @@
 		
 		<where>
 		
-			<if test="tranCode != null and tranCode.size() > 0">
+			<if test="tranCodes != null and tranCodes.size() > 0">
 			    pro_tran_code IN 
-			    <foreach item="code" collection="tranCode" open="(" separator="," close=")">
+			    <foreach item="code" collection="tranCodes" open="(" separator="," close=")">
 			        ${code}
 			    </foreach>
 			</if>
@@ -182,9 +182,9 @@
 				
 				<where>
 				
-					<if test="tranCode != null and tranCode.size() > 0">
+					<if test="tranCodes != null and tranCodes.size() > 0">
 					    pro_tran_code IN 
-					    <foreach item="code" collection="tranCode" open="(" separator="," close=")">
+					    <foreach item="code" collection="tranCodes" open="(" separator="," close=")">
 					        ${code}
 					    </foreach>
 					</if>
@@ -229,7 +229,7 @@
 			resultMap="productSelectMap">
 		
 		SELECT
-		prod_no, prod_name, prod_detail, TO_DATE(manufacture_day, 'YYYY-MM-DD') manufacture_day, price, image_file, reg_date, pro_tran_code
+		prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, pro_tran_code
 		FROM product
 		WHERE prod_no = #{prodNo}
 		

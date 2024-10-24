@@ -3,6 +3,9 @@ package com.model2.mvc.common;
 
 import javax.servlet.ServletContext;
 
+import lombok.ToString;
+
+@ToString
 public class Paging {
 
 	// Field
@@ -130,9 +133,9 @@ public class Paging {
 		return totalPage;
 	}
 	
-	public String toString() {
-		return String.format("Paging [total] %d, [totalPage] %d, [currentPage] %d", total, totalPage, currentPage);
-	}
+//	public String toString() {
+//		return String.format("Paging [total] %d, [totalPage] %d, [currentPage] %d", total, totalPage, currentPage);
+//	}
 	
 }
 // class end

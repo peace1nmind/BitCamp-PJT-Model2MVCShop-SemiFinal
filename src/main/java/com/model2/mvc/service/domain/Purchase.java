@@ -7,7 +7,9 @@ import java.util.Map;
 import com.model2.mvc.service.TranCodeMapper;
 import com.model2.mvc.service.domain.Product;
 
+import lombok.ToString;
 
+@ToString
 public class Purchase {
 
 	// Field
@@ -27,6 +29,10 @@ public class Purchase {
 	//														(배송이 완료되면 배송된 날짜로 변경하기)
 	private int prodNo;
 	private String buyerId;
+	
+	private String phone1;
+	private String phone2;
+	private String phone3;
 	
 	
 	// Constructor
@@ -104,16 +110,25 @@ public class Purchase {
 
 	public String getReceiverPhone() {
 		return receiverPhone;
+		
 	}
 
 	public void setReceiverPhone(String receiverPhone) {
 		
-		if (receiverPhone==null) {
-			receiverPhone = "";
-			
-		} else if (receiverPhone.contains("-")) {
-			receiverPhone = receiverPhone.replace("-", "");
-			
+//		if (receiverPhone==null) {
+//			receiverPhone = "";
+//			
+//		} else if (receiverPhone.contains("-")) {
+//			receiverPhone = receiverPhone.replace("-", "");
+//			
+//		}
+		
+		this.receiverPhone = receiverPhone;
+		
+		if(receiverPhone != null && receiverPhone.length() !=0 && receiverPhone.contains("-")){
+			phone1 = receiverPhone.split("-")[0];
+			phone2 = receiverPhone.split("-")[1];
+			phone3 = receiverPhone.split("-")[2];
 		}
 		
 		this.receiverPhone = receiverPhone;
@@ -167,26 +182,26 @@ public class Purchase {
 		this.dlvyDate = (dlvyDate==null)? dlvyDate : dlvyDate.split(" ")[0];
 	}
 
-	@Override
-	public String toString() {
-
-		return String.format("Purchase : [tranNo] %d "
-				+ "\n\t[puchaseProd] %s "
-				+ "\n\t[buyer] %s "
-				+ "\n\t[paymentOption] %s "
-				+ "\n\t[receiverName] %s [receiverPhone] %s "
-				+ "\n\t[dlvyAddr] %s [dlvyRequest] %s "
-				+ "\n\t[tranCode] %s "
-				+ "\n\t[orderDate] %s [dlvyDate] %s ", 
-						tranNo, 
-						purchaseProd, 
-						buyer, 
-						paymentOption, 
-						receiverName, receiverPhone, 
-						dlvyAddr, dlvyRequest, 
-						tranCode, 
-						orderDate, dlvyDate);
-	}
+//	@Override
+//	public String toString() {
+//
+//		return String.format("Purchase : [tranNo] %d "
+//				+ "\n\t[puchaseProd] %s "
+//				+ "\n\t[buyer] %s "
+//				+ "\n\t[paymentOption] %s "
+//				+ "\n\t[receiverName] %s [receiverPhone] %s "
+//				+ "\n\t[dlvyAddr] %s [dlvyRequest] %s "
+//				+ "\n\t[tranCode] %s "
+//				+ "\n\t[orderDate] %s [dlvyDate] %s ", 
+//						tranNo, 
+//						purchaseProd, 
+//						buyer, 
+//						paymentOption, 
+//						receiverName, receiverPhone, 
+//						dlvyAddr, dlvyRequest, 
+//						tranCode, 
+//						orderDate, dlvyDate);
+//	}
 
 }
 // class end

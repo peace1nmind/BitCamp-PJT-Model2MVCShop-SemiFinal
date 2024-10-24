@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
@@ -109,22 +110,36 @@ public class UserController {
 	public String login() throws Exception{
 		
 		System.out.println("/user/logon : GET");
-
+		
 		return "redirect:/user/loginView.jsp";
 	}
 	
 	@RequestMapping( value="login", method=RequestMethod.POST )
-	public String login(@ModelAttribute("user") User user , HttpSession session ) throws Exception{
+	public String login(@ModelAttribute("user") User user , HttpSession session, Model model ) throws Exception{
 		
 		System.out.println("/user/login : POST");
 		//Business Logic
 		User dbUser=userService.getUser(user.getUserId());
 		
-		if( user.getPassword().equals(dbUser.getPassword())){
-			session.setAttribute("user", dbUser);
-		}
+		if (dbUser == null) {
+			model.addAttribute("message", "<로그인 실패>\n 아이디 또는 패스워드를 확인해주세요.");
+			
+			return "/user/loginView.jsp";
+			
+		} else {
 		
-		return "redirect:/index.jsp";
+			if( user.getPassword().equals(dbUser.getPassword())){
+				session.setAttribute("user", dbUser);
+	
+			} else {
+				model.addAttribute("message", "<로그인 실패>\n 아이디 또는 패스워드를 확인해주세요.");
+				
+				return "/user/loginView.jsp";
+			}
+			
+			return "redirect:/index.jsp";
+			
+		}
 	}
 
 	@RequestMapping( value="logout", method=RequestMethod.GET )

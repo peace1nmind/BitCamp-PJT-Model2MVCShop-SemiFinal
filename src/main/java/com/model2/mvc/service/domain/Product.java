@@ -9,6 +9,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.model2.mvc.service.TranCodeMapper;
 
+import lombok.ToString;
+
+@ToString
 public class Product {
 	
 	private int prodNo;
@@ -119,13 +122,13 @@ public class Product {
 	}
 
 	// Override
-	public String toString() {
-		
-		return String.format("ProductVO : [prodNo] %d [prodName] %s [prodDetail] %s "
-				+ "\n\t [manuDate] %s [price] %d [fileName] %s  "
-				+ "\n\t [regDate] %s [proTranCode] %s ", 
-						prodNo, prodName, prodDetail, manuDate,price, fileName, regDate,proTranCode);
-	}
+//	public String toString() {
+//		
+//		return String.format("ProductVO : [prodNo] %d [prodName] %s [prodDetail] %s "
+//				+ "\n\t [manuDate] %s [price] %d [fileName] %s  "
+//				+ "\n\t [regDate] %s [proTranCode] %s ", 
+//						prodNo, prodName, prodDetail, manuDate,price, fileName, regDate,proTranCode);
+//	}
 
 }
 // class end

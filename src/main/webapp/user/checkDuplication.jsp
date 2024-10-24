@@ -55,6 +55,8 @@
 				
 				if(opener) {
 					opener.$("input[name='userId']").val("${userId}");
+					opener.$("div#userIdCheck").attr("class", "form-group has-success has-feedback");
+					opener.$("span#userIdCheck").attr("class", "glyphicon glyphicon-ok form-control-feedback");
 					opener.$("input[name='password']").focus();
 				}
 				

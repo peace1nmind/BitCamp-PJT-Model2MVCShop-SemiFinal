@@ -123,10 +123,11 @@ public class PurchaseController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
-		modelAndView.setViewName("forward:/purchase/addPurchaseView.jsp");
+		modelAndView.setViewName("forward:/purchase/addAndUpdatePurchase.jsp");
 		
 		Product product = productService.getProduct(prodNo);
 		modelAndView.addObject("product", product);
+		modelAndView.addObject("fnc", "add");
 		
 		return modelAndView;
 		
@@ -140,10 +141,10 @@ public class PurchaseController {
 		System.out.println("/addPurchase POST");
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("forward:/purchase/addPurchase.jsp");
+		
 		
 		purchase = purchaseService.addPurchase(purchase);
-		
+		modelAndView.setViewName("redirect:/purchase/getPurchase?tranNo="+purchase.getTranNo());
 		modelAndView.addObject("purchase", purchase);
 		
 		return modelAndView;
@@ -151,12 +152,17 @@ public class PurchaseController {
 	
 	
 	// 구매정보
-	@RequestMapping(value="/getPurchase", params = "tranNo")
-	public ModelAndView getPurchase(@RequestParam("tranNo") int tranNo) {
+	@RequestMapping(value="/getPurchase")
+	public ModelAndView getPurchase(@RequestParam(required = false, defaultValue = "0") int tranNo,
+									@RequestParam(required = false, defaultValue = "0") int prodNo) {
 		
 		// TODO interceptor 필요
 		
 		System.out.println("/getPurchase");
+		
+		if (tranNo == 0) {
+			tranNo = purchaseService.getPurchaseByProdNo(prodNo).getTranNo();
+		}
 		
 		ModelAndView modelAndView = new ModelAndView("forward:/purchase/getPurchase.jsp");
 		modelAndView.addObject("purchase", purchaseService.getPurchase(tranNo));
@@ -171,8 +177,9 @@ public class PurchaseController {
 		
 		System.out.println("/updatePurchase GET");
 		
-		ModelAndView modelAndView = new ModelAndView("forward:/purchase/updatePurchaseView.jsp");
+		ModelAndView modelAndView = new ModelAndView("forward:/purchase/addAndUpdatePurchase.jsp");
 		modelAndView.addObject("purchase", purchaseService.getPurchase(tranNo));
+		modelAndView.addObject("fnc", "update");
 		
 		return modelAndView;
 	}
@@ -182,7 +189,7 @@ public class PurchaseController {
 		
 		System.out.println("/updatePurchase POST");
 		
-		ModelAndView modelAndView = new ModelAndView("forward:/purchase/updatePurchase.jsp");
+		ModelAndView modelAndView = new ModelAndView("forward:/purchase/getPurchase.jsp");
 		
 		modelAndView.addObject("purchase", purchaseService.updatePurchase(purchase));
 		
@@ -192,20 +199,22 @@ public class PurchaseController {
 	
 	// 배송하기, 물건도착
 	// listSale (관리자)에서 배송하기 요청
-	@RequestMapping("updateTranCode")
+	@RequestMapping("/updateTranCode")
 	public ModelAndView updateTranCode(@RequestParam(required = false, defaultValue = "0") int tranNo,
 									   @RequestParam(required = false, defaultValue = "0") int prodNo,
 									   @ModelAttribute Search search,
 									   @RequestParam String tranCode,
 									   RedirectAttributes redirectAttributes) {
 		
-		System.out.println("/updateTranCode?"+((tranNo == 0)? "tranNo="+tranNo : "prodNo="+prodNo ));
+		System.out.println("/updateTranCode?"+((tranNo == 0)? "prodNo="+prodNo : "tranNo="+tranNo ));
 		
 		System.out.println(tranCode);
 		
 		if (tranNo == 0) {
 			tranNo = purchaseService.getPurchaseByProdNo(prodNo).getTranNo();
 		}
+		
+		System.out.println(search);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		

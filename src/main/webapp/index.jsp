@@ -14,6 +14,7 @@
 		
 		<%@ include file="/common/import.jsp" %>
 		
+		
 	</head>
 	
 	<body>
@@ -21,6 +22,9 @@
 <%-- 		<%@ include file="/layout/toolbar.jsp" %> --%>
 		<jsp:include page="/layout/toolbar.jsp" />
 		
+		<div class="container text-center">
+			<img src="/images/uploadFiles/main.jpg" class="img-thumbnail"  width="600" height="600" style="margin-top: 30px;">
+		</div>
 		
 	</body>
 	

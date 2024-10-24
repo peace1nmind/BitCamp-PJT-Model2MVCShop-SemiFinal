@@ -152,7 +152,13 @@ public class ProductController {
 							 Model model) throws NumberFormatException, Exception {
 		
 		// 상품정보를 가져오는 로직
-		model.addAttribute("product", productService.getProduct(Integer.parseInt(prodNo)));
+		Product product = productService.getProduct(Integer.parseInt(prodNo));
+		
+		if (product.getFileName() == null || product.getFileName().equals("")) {
+			product.setFileName("ready.jpg");
+		}
+		
+		model.addAttribute("product", product);
 		model.addAttribute("menu", menu);
 	
 		
@@ -235,7 +241,8 @@ public class ProductController {
 			String fileExtension = product.getFileName().substring(product.getFileName().lastIndexOf("."));
 			String uploadFileName = uuid + fileExtension;
 			
-			product.getFile().transferTo(new File(uploadDir + uploadFileName));			
+			product.getFile().transferTo(new File(uploadDir + uploadFileName));
+			Thread.sleep(2000);
 			
 			product.setFileName(uploadFileName);
 			
@@ -284,6 +291,7 @@ public class ProductController {
 			
 			try {
 				product.getFile().transferTo(uploadFile);
+				Thread.sleep(2000);
 				
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
@@ -294,6 +302,8 @@ public class ProductController {
 			}
 			
 			product.setFileName(uploadFileName);
+		} else {
+			product.setFileName("ready.jpg");
 		}
 		
 		product = productService.addProduct(product);

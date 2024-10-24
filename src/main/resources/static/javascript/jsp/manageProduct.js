@@ -46,8 +46,38 @@ $(function() {
 		let link = $(this).data("href");
 		let prodNo = $(this).data("prodno");
 		
-		$(self.location).attr("href", link+"prodNo="+prodNo);
-		
+		if (link == "/purchase/updateTranCode") {
+			
+			let tranCode = $(this).data("trancode");
+			
+			$("input[name='prodNo'").val(prodNo);
+			$("input[name='tranCode'").val(tranCode);
+			
+			switch (tranCode) {
+
+				// 구매확정
+				case 5 :
+					text = "구매확정하시겠습니까?"
+					break;
+				
+				// 배송완료
+				case  4 :
+					text = "배송완료하시겠습니까?";
+				 break;
+				 
+				 // 배송시작
+				 case 3 :
+					text = "배송하시겠습니까?";
+					break;
+			}
+			
+			if (confirm(text)) {
+				$("form").attr("action", "/purchase/updateTranCode").submit();
+			}
+			
+		} else {
+			$(self.location).attr("href", link+"prodNo="+prodNo);
+		}
 	});
 	
 

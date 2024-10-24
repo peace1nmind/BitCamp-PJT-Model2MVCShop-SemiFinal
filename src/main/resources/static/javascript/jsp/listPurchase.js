@@ -52,7 +52,6 @@ function fncGetPurchaseHistoryList(page) {
 function fncUpdateTranCode(tranNo, tranCode) {
 	
 	let text = "";
-	alert (tranCode);
 	
 	switch (tranCode) {
 
@@ -151,5 +150,32 @@ $(function () {
 	pageNavigate("paging", fncGetPurchaseList);
 	pageNavigate("historyPaging", fncGetPurchaseHistoryList);
 	priceFormat()
+	
+	// 구매이력 - 상품정보
+	$("#purchaseList a#prodName").on('click', function() {
+		
+		let prodNo = $(this).data("prodno");
+		let prodName = $(this).text();
+		
+		$(self.location).attr("href", "/product/getProduct?prodNo="+prodNo);
+		
+	});
+	
+	// 구매이력 내역 - 구매정보
+	$("#purchaseHistoryList a#prodName").on('click', function() {
+			
+		let tranNo = $(this).data("tranno");
+		let prodName = $(this).text();
+		
+		$(self.location).attr("href", "/purchase/getPurchase?tranNo="+tranNo);
+		
+	});
+	
+	// 구매이력 - 구매정보
+	$(".getPurchase").on('click', function() {
+		let tranNo = $(this).data("tranno");
+		
+		$(self.location).attr("href", "/purchase/getPurchase?tranNo="+tranNo);
+	})
 	
 });
