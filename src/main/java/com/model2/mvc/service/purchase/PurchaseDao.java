@@ -25,13 +25,13 @@ public interface PurchaseDao {
 	public List<Purchase> selectPurchaseList(Search search, String buyerId, RowBounds rowBounds);
 	
 	// 구매이력 (구매완료~배송중) count
-	public int countPurchaseList(String buyerId);
+	public int countPurchaseList(Search search, String buyerId);
 	
 	// 유저 구매이력 조회 (배송완료~)
 	public List<Purchase> selectPurchaseHistoryList(Search search, String buyerId, RowBounds rowBounds);
 	
 	// 구매이력 (배송완료~) count
-	public int countPurchaseHistoryList(String buyerId);
+	public int countPurchaseHistoryList(Search search, String buyerId);
 	
 	// 판매완료 상품리스트 조회 (관리자)
 	// RowBounds 사용하기

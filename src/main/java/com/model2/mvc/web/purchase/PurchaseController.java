@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.model2.mvc.common.Paging;
 import com.model2.mvc.common.Search;
@@ -96,7 +97,9 @@ public class PurchaseController {
 		
 		
 		/* listPurchaseHistory 로직 */
-		Search historySearch =  new Search(historyPage, pageSize);
+		Search historySearch = search.clone();
+		historySearch.setPage(historyPage);
+
 		Map<String, Object> historyMap = purchaseService.getPurchaseHistoryList(historySearch, buyer.getUserId());
 		Paging historyPaging = new Paging((int) historyMap.get("count"), historySearch.getCurrentPage(), pageSize, pageUnit);
 		
@@ -193,7 +196,8 @@ public class PurchaseController {
 	public ModelAndView updateTranCode(@RequestParam(required = false, defaultValue = "0") int tranNo,
 									   @RequestParam(required = false, defaultValue = "0") int prodNo,
 									   @ModelAttribute Search search,
-									   @RequestParam String tranCode) {
+									   @RequestParam String tranCode,
+									   RedirectAttributes redirectAttributes) {
 		
 		System.out.println("/updateTranCode?"+((tranNo == 0)? "tranNo="+tranNo : "prodNo="+prodNo ));
 		
@@ -213,16 +217,20 @@ public class PurchaseController {
 			purchaseService.updateTranCode(purchase, tranCode);
 			productService.updateTranCode(purchase.getPurchaseProd().getProdNo(), tranCode);
 			
-		} else if (tranCode.equals("5")) {	// 구매확정
+			redirectAttributes.addFlashAttribute(search);
+			
+		} 
+		
+		if (tranCode.equals("5")) {	// 구매확정
 			modelAndView.setViewName("redirect:/purchase/listPurchase");
 			
 			Purchase purchase = purchaseService.getPurchase(tranNo);
 			
 			purchaseService.updateTranCode(tranNo, tranCode);
 			productService.updateTranCode(purchase.getPurchaseProd().getProdNo(), tranCode);
+			
+			redirectAttributes.addFlashAttribute(search);
 		}
-		
-		modelAndView.addObject("search", search);
 		
 		return modelAndView;
 	}

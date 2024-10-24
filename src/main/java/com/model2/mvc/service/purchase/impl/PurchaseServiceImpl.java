@@ -96,7 +96,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 		
 		try {
 			map.put("list", purchaseDao.selectPurchaseList(search, buyerId, getRowBounds(search)));
-			map.put("count", purchaseDao.countPurchaseList(buyerId));
+			map.put("count", purchaseDao.countPurchaseList(search, buyerId));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -113,7 +113,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 		
 		try {
 			map.put("list", purchaseDao.selectPurchaseHistoryList(search, buyerId, getRowBounds(search)));
-			map.put("count", purchaseDao.countPurchaseHistoryList(buyerId));
+			map.put("count", purchaseDao.countPurchaseHistoryList(search, buyerId));
 			
 		} catch (Exception e) {
 			e.printStackTrace();

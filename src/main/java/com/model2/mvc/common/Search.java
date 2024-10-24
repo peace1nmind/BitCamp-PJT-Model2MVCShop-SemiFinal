@@ -11,7 +11,7 @@ import lombok.ToString;
 
 //==>리스트화면을 모델링(추상화/캡슐화)한 Bean
 @ToString
-public class Search {
+public class Search implements Cloneable {
 	
 	///Field
 	private int currentPage = 1;
@@ -177,5 +177,19 @@ public class Search {
 	public int getStartRowNum() {
 		return (getCurrentPage()-1)*getPageSize();
 	}
+	
+	@Override
+    public Search clone() {
+        try {
+            // 얕은 복사로 Search 객체 복사
+            Search cloned = (Search) super.clone();
 
+            // 참조 타입인 ArrayList는 깊은 복사를 수행
+            cloned.tranCode = new ArrayList<>(this.tranCode);
+
+            return cloned;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError(); // This shouldn't happen
+        }
+    }
 }

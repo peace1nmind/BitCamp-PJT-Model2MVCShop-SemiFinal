@@ -78,7 +78,7 @@ public class PurchaseDaoImpl_NoUse implements PurchaseDao {
 	}
 
 	@Override
-	public int countPurchaseList(String buyerId) {
+	public int countPurchaseList(Search search, String buyerId) {
 
 		return sqlSession.selectOne("PurchaseMapper.countPurchaseList", buyerId);
 	}
@@ -101,7 +101,7 @@ public class PurchaseDaoImpl_NoUse implements PurchaseDao {
 	}
 
 	@Override
-	public int countPurchaseHistoryList(String buyerId) {
+	public int countPurchaseHistoryList(Search search, String buyerId) {
 
 		return sqlSession.selectOne("PurchaseMapper.countPurchaseHistoryList", buyerId);
 	}

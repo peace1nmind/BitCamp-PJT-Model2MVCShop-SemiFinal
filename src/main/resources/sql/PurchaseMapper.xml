@@ -85,15 +85,47 @@
 	<!-- selectPurchaseList: 구매이력 조회 (구매완료~배송중) -->
 	<!-- RowBouns 사용해보기 RowBounds(offset, limit) -->
 	<select id="selectPurchaseList"
-			parameterType="string"
 			resultMap="purchaseSelectMap">
 	
-		SELECT * 
-		FROM transaction
-		WHERE buyer_id = #{buyerId}
-		AND tran_status_code BETWEEN 2 AND 3
-		ORDER BY order_date DESC
-				
+		SELECT t.* 
+		FROM transaction t, product p
+		
+		<where>
+			t.prod_no = p.prod_no
+			AND t.buyer_id = #{buyerId}
+			AND t.tran_status_code BETWEEN 2 AND 3
+			AND t.order_date BETWEEN #{search.startDate} AND #{search.endDate}
+			
+			<if test="search.searchKeyword != null and search.searchKeyword != ''">
+				<choose>
+					<!-- 상품명 검색 -->
+					<when test="search.searchCondition == 1">
+						AND p.prod_name LIKE '%'||#{search.searchKeyword}||'%'
+					</when>
+					
+					<!-- 상품설명 -->
+					<when test="search.searchCondition == 2">
+						AND p.prod_detail LIKE '%'||#{search.searchKeyword}||'%'
+					</when>
+					
+					<!-- 기본 상품번호 검색 -->
+					<otherwise>
+						AND p.prod_no LIKE '%'||#{search.searchKeyword}||'%'
+					</otherwise>
+				</choose>
+			</if>
+			
+			<!-- 가격 범위검색 -->
+			<if test="search.searchPriceBigger != 0">
+				AND p.price &gt;= #{search.searchPriceBigger:INTEGER}
+			</if>
+			<if test="search.searchPriceLess != 0">
+				AND p.price &lt;= #{search.searchPriceLess:INTEGER}
+			</if>
+		</where>
+			
+		ORDER BY t.tran_status_code, t.order_date DESC
+			
 	</select>
 	
 	
@@ -102,10 +134,42 @@
 			resultType="java.lang.Integer">
 	
 		SELECT COUNT(*)
-		FROM (SELECT * 
-			  FROM transaction
-			  WHERE buyer_id = #{buyerId}
-			  AND tran_status_code BETWEEN 2 AND 3
+		FROM (	SELECT t.* 
+				FROM transaction t, product p
+				
+				<where>
+					t.prod_no = p.prod_no
+					AND t.buyer_id = #{buyerId}
+					AND t.tran_status_code BETWEEN 2 AND 3
+					AND t.order_date BETWEEN #{search.startDate} AND #{search.endDate}
+					
+					<if test="search.searchKeyword != null and search.searchKeyword != ''">
+						<choose>
+							<!-- 상품명 검색 -->
+							<when test="search.searchCondition == 1">
+								AND p.prod_name LIKE '%'||#{search.searchKeyword}||'%'
+							</when>
+							
+							<!-- 상품설명 -->
+							<when test="search.searchCondition == 2">
+								AND p.prod_detail LIKE '%'||#{search.searchKeyword}||'%'
+							</when>
+							
+							<!-- 기본 상품번호 검색 -->
+							<otherwise>
+								AND p.prod_no LIKE '%'||#{search.searchKeyword}||'%'
+							</otherwise>
+						</choose>
+					</if>
+					
+					<!-- 가격 범위검색 -->
+					<if test="search.searchPriceBigger != 0">
+						AND p.price &gt;= #{search.searchPriceBigger:INTEGER}
+					</if>
+					<if test="search.searchPriceLess != 0">
+						AND p.price &lt;= #{search.searchPriceLess:INTEGER}
+					</if>
+				</where>
 			  )
 			
 	</select>
@@ -113,14 +177,46 @@
 	
 	<!-- selectPurchaseHistoryList: 구매이력 조회 (배송완료~) -->
 	<select id="selectPurchaseHistoryList"
-			parameterType="string"
 			resultMap="purchaseSelectMap">
-	
-		SELECT * 
-		FROM transaction
-		WHERE buyer_id = #{buyerId}
-		AND tran_status_code &gt;= 4
-		ORDER BY tran_status_code, order_date DESC
+		
+		SELECT t.* 
+		FROM transaction t, product p
+		
+		<where>
+			t.prod_no = p.prod_no
+			AND t.buyer_id = #{buyerId}
+			AND tran_status_code &gt;= 4
+			AND t.order_date BETWEEN #{search.startDate} AND #{search.endDate}
+			
+			<if test="search.searchKeyword != null and search.searchKeyword != ''">
+				<choose>
+					<!-- 상품명 검색 -->
+					<when test="search.searchCondition == 1">
+						AND p.prod_name LIKE '%'||#{search.searchKeyword}||'%'
+					</when>
+					
+					<!-- 상품설명 -->
+					<when test="search.searchCondition == 2">
+						AND p.prod_detail LIKE '%'||#{search.searchKeyword}||'%'
+					</when>
+					
+					<!-- 기본 상품번호 검색 -->
+					<otherwise>
+						AND p.prod_no LIKE '%'||#{search.searchKeyword}||'%'
+					</otherwise>
+				</choose>
+			</if>
+			
+			<!-- 가격 범위검색 -->
+			<if test="search.searchPriceBigger != 0">
+				AND p.price &gt;= #{search.searchPriceBigger:INTEGER}
+			</if>
+			<if test="search.searchPriceLess != 0">
+				AND p.price &lt;= #{search.searchPriceLess:INTEGER}
+			</if>
+		</where>
+			
+		ORDER BY t.tran_status_code, t.order_date DESC
 					
 	</select>
 	
@@ -130,10 +226,42 @@
 			resultType="java.lang.Integer">
 	
 		SELECT COUNT(*)
-		FROM (	SELECT * 
-				FROM transaction
-				WHERE buyer_id = #{buyerId}
-				AND tran_status_code &gt;= 4
+		FROM (	SELECT t.* 
+				FROM transaction t, product p
+				
+				<where>
+					t.prod_no = p.prod_no
+					AND t.buyer_id = #{buyerId}
+					AND tran_status_code &gt;= 4
+					AND t.order_date BETWEEN #{search.startDate} AND #{search.endDate}
+					
+					<if test="search.searchKeyword != null and search.searchKeyword != ''">
+						<choose>
+							<!-- 상품명 검색 -->
+							<when test="search.searchCondition == 1">
+								AND p.prod_name LIKE '%'||#{search.searchKeyword}||'%'
+							</when>
+							
+							<!-- 상품설명 -->
+							<when test="search.searchCondition == 2">
+								AND p.prod_detail LIKE '%'||#{search.searchKeyword}||'%'
+							</when>
+							
+							<!-- 기본 상품번호 검색 -->
+							<otherwise>
+								AND p.prod_no LIKE '%'||#{search.searchKeyword}||'%'
+							</otherwise>
+						</choose>
+					</if>
+					
+					<!-- 가격 범위검색 -->
+					<if test="search.searchPriceBigger != 0">
+						AND p.price &gt;= #{search.searchPriceBigger:INTEGER}
+					</if>
+					<if test="search.searchPriceLess != 0">
+						AND p.price &lt;= #{search.searchPriceLess:INTEGER}
+					</if>
+				</where>
 			 )
 			
 	</select>

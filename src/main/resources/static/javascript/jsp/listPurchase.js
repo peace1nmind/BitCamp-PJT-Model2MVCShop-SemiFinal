@@ -30,22 +30,22 @@ function searchCheck() {
 
 function fncGetPurchaseList(page) {
 	
-	let okFlag = searchCheck();
+//	let okFlag = searchCheck();
 	
-	if (okFlag) {
+//	if (okFlag) {
 		$("input[name='page']").val(page);
 		$("form").submit();
-	}
+//	}
 }
 
 function fncGetPurchaseHistoryList(page) {
 	
-	let okFlag = searchCheck();
+//	let okFlag = searchCheck();
 		
-	if (okFlag) {
+//	if (okFlag) {
 		$("input[name='historyPage']").val(page);
 		$("form").submit();
-	}
+//	}
 }
 
 // 배송시작, 배송완료, 구매확정
@@ -78,6 +78,29 @@ function fncUpdateTranCode(tranNo, tranCode) {
 	
 }
 
+function getToday() {
+	
+	let today = new Date();
+	let year = today.getFullYear();
+	let month = (today.getMonth() + 1).toString().padStart(2, '0');
+	let day = today.getDate().toString().padStart(2, '0');
+	
+	return `${year}-${month}-${day}`
+}
+
+function getMonthAgo() {
+	
+	let monthAgo = new Date();
+	monthAgo.setMonth(monthAgo.getMonth() - 1);
+	
+	let year = monthAgo.getFullYear();
+	let month = (monthAgo.getMonth() + 1).toString().padStart(2, '0');
+	let day = monthAgo.getDate().toString().padStart(2, '0');
+	
+	return `${year}-${month}-${day}`
+}
+
+
 $(function () {
 	
 	$("form").attr("action", "/purchase/listPurchase").attr("method", "POST");
@@ -85,23 +108,33 @@ $(function () {
 	// 엔터 검색
 	$(document).on("keydown", function(event) {
 		if (event.key == 'Enter') {
-			$("input[name='historyPage']").val(1);
-			fncGetPurchaseList(1);
+			
+			if (searchCheck()) {
+				$("input[name='historyPage']").val(1);
+				fncGetPurchaseList(1);
+			}
 		}
 	});
 	
 	// 검색버튼
 	$("#search").on('click', function() {
-		$("input[name='historyPage']").val(1);
-		fncGetPurchaseList(1);
+		
+		if (searchCheck()) {
+			$("input[name='historyPage']").val(1);
+			fncGetPurchaseList(1);
+		}
+		
 	});
 		
 	// 리셋 버튼
 	$("#reset").on('click', function() {
-//		$("select[name='searchCondition']").val("0");
-//		$("input[name='searchKeyword'").val("");
-//		$("input[name='searchPriceBigger'], input[name='searchPriceLess']").val(0);
-//		$("input[type='radio']").prop("checked", false);
+		$("select[name='searchCondition']").val("0");
+		$("input[name='searchKeyword'").val("");
+		$("input[name='searchPriceBigger'], input[name='searchPriceLess']").val(0);
+		$("input[type='radio']").prop("checked", false);
+		
+		$("input[name='startDate']").val(getMonthAgo());
+		$("input[name='endDate']").val(getToday());
 		
 	});
 	
