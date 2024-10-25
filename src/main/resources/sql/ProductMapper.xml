@@ -61,7 +61,7 @@
 		<trim prefix="ORDER BY" prefixOverrides=",">
 			<if test="orderByPrice != null and orderByPrice != ''">${orderByPrice},</if>
 			<if test="orderByProdName != null and orderByProdName != ''">${orderByProdName},</if>
-			prod_no, reg_date DESC NULLS LAST, prod_no 
+			reg_date DESC NULLS LAST, prod_no 
 		</trim>	
 		
 	</select>

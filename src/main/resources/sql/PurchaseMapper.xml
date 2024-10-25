@@ -124,7 +124,7 @@
 			</if>
 		</where>
 			
-		ORDER BY t.tran_status_code, t.order_date DESC
+		ORDER BY t.tran_status_code, t.tran_no DESC, t.order_date DESC
 			
 	</select>
 	

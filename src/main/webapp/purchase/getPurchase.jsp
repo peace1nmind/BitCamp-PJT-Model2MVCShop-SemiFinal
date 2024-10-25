@@ -110,7 +110,7 @@
 			<hr/>
 			
 			<div class="row">
-		  		<div class="col-xs-4 col-md-2 "><strong>배송 희망일</strong></div>
+		  		<div class="col-xs-4 col-md-2 "><strong>${ (purchase.tranCode >= 4)? "배송완료일" : "배송 희망일" }</strong></div>
 				<div class="col-xs-8 col-md-4">${ purchase.dlvyDate }</div>
 			</div>
 			
@@ -123,7 +123,7 @@
 		  				<button type="button" class="btn btn-primary" data-tranno="${ purchase.tranNo }">수정</button>
 		  			</c:if>
 		  			
-		  			<button type="button" class="btn btn-primary">${ (user.role == 'user') ? "구매목록" : "이전" }</button>
+		  			<button type="button" class="btn btn-primary">${ (user.role == "user") ? "구매목록" : "이전" }</button>
 		  			
 		  		</div>
 			</div>

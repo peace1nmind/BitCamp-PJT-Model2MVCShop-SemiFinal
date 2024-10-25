@@ -33,7 +33,8 @@ $(function() {
 		$("input[name='searchKeyword'").val("");
 		$("input[name='searchPriceBigger'], input[name='searchPriceLess']").val(0);
 		$("input[type='radio']").prop("checked", false);
-		$("input[type='checkbox']").prop("checked", false)
+		$("input[type='checkbox']").prop("checked", false);
+		$("#default:checkbox").prop("checked", true);
 	});
 	
 	// 검색버튼

@@ -110,7 +110,7 @@
 		  		<div class="col-xs-4 col-md-2 "><label for="receiverName">받는 사람 *</label></div>
 
 				<div class="col-xs-8 col-md-4">
-						<input type="text" id="receiverName" name="receiverName" value="${(fnc == 'add')? user.userId :  purchase.receiverName }" class="form-control">
+						<input type="text" id="receiverName" name="receiverName" value="${(fnc == 'add')? user.userName :  purchase.receiverName }" class="form-control">
 				</div>
 	
 				

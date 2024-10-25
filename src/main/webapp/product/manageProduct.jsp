@@ -53,7 +53,7 @@
 								<li class="list-group-item">
 									<div>
 										<label>
-											<input type="checkbox" name="tranCodes" value="1" ${ search.tranCodes.contains("1")? "checked" : "" } >&ensp;<span>판매중</span>
+											<input type="checkbox" name="tranCodes" value="1" ${ search.tranCodes.contains("1")? "checked" : "" } id="default">&ensp;<span>판매중</span>
 										</label>
 									</div>
 										<label>

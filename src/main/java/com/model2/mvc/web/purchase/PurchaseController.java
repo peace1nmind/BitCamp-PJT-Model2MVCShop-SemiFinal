@@ -1,6 +1,8 @@
 package com.model2.mvc.web.purchase;
 // W 24... 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -222,6 +224,15 @@ public class PurchaseController {
 			modelAndView.setViewName("redirect:/product/manageProduct");
 			
 			Purchase purchase = purchaseService.getPurchase(tranNo);
+			
+			if (tranCode.equals("4")) {
+				
+				DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate today = LocalDate.now();
+				String strToday = today.format(dateFormat);
+				
+				purchase.setDlvyDate(strToday);
+			}
 			
 			purchaseService.updateTranCode(purchase, tranCode);
 			productService.updateTranCode(purchase.getPurchaseProd().getProdNo(), tranCode);
