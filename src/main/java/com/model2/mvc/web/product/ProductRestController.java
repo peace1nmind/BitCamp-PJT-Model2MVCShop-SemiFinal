@@ -2,6 +2,7 @@ package com.model2.mvc.web.product;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +60,9 @@ public class ProductRestController {
 	@Value("${pageSize}")
 	int pageSize;
 	
+	@Value("${listSize}")
+	int listSize;
+	
 	@Value("${uploadDir}")
 	String uploadDir;
 
@@ -80,14 +84,9 @@ public class ProductRestController {
 		// 상품 목록 / 상품 관리 구분 로직
 		// menu: search , manage
 		Map<String, Object> responseMap = new HashMap<String, Object>();
-		
-		responseMap.put("menu", menu);
-		responseMap.put("title", (menu!=null && menu.equals("search"))? "상품 목록조회" : "상품관리 (판매전)");
-		responseMap.put("navi", (menu!=null && menu.equals("search"))? "getProduct" : "updateProduct");
-		
-		
+			
 		// 검색 조건을 다루는 로직
-		search.setPageSize(pageSize);
+		search.setPageSize(listSize);
 		responseMap.put("search", search);
 		
 		
@@ -101,25 +100,23 @@ public class ProductRestController {
 		responseMap.put("paging", paging);
 		
 		
-		/* 구매완료 상품들 (listSale) */
-		if (menu.equals("manage")) {
-			Search saleSearch = search;
-			saleSearch.setCurrentPage(salePage);
-			saleSearch.setPageSize(pageSize);
-			
-			System.out.println(String.format("\n\nsearch= %s \n\n", search));
-			System.out.println(String.format("\n\nsaleSearch=  %s \n\n", saleSearch));
-			
-			Map<String, Object> saleMap = purchaseService.getSaleList(saleSearch);
-			responseMap.put("saleMap", saleMap);
-			
-			Paging salePaging = new Paging((int) saleMap.get("count"), saleSearch.getCurrentPage(), pageSize, pageUnit);
-			responseMap.put("salePaging", salePaging);
-		}
-		
-		responseMap.put("tranCodeMap", TranCodeMapper.getInstance().getMap());
-		
-		System.out.println("\n\n여기까지?\n\n");
+//		/* 구매완료 상품들 (listSale) */
+//		if (menu.equals("manage")) {
+//			Search saleSearch = search;
+//			saleSearch.setCurrentPage(salePage);
+//			saleSearch.setPageSize(pageSize);
+//			
+//			System.out.println(String.format("\n\nsearch= %s \n\n", search));
+//			System.out.println(String.format("\n\nsaleSearch=  %s \n\n", saleSearch));
+//			
+//			Map<String, Object> saleMap = purchaseService.getSaleList(saleSearch);
+//			responseMap.put("saleMap", saleMap);
+//			
+//			Paging salePaging = new Paging((int) saleMap.get("count"), saleSearch.getCurrentPage(), pageSize, pageUnit);
+//			responseMap.put("salePaging", salePaging);
+//		}
+//		
+//		responseMap.put("tranCodeMap", TranCodeMapper.getInstance().getMap());
 		
 		return responseMap;
 	}
@@ -137,8 +134,14 @@ public class ProductRestController {
 		
 		Map<String, Object> responseMap = new HashMap<String, Object>();
 		
+		Product product = productService.getProduct(Integer.parseInt(prodNo));
+		
+		if (product.getFileName() == null || product.getFileName().equals("")) {
+			product.setFileName("ready.jpg");
+		}
+		
 		// 상품정보를 가져오는 로직
-		responseMap.put("product", productService.getProduct(Integer.parseInt(prodNo)));
+		responseMap.put("product", product);
 		responseMap.put("menu", menu);
 		
 		
@@ -236,6 +239,9 @@ public class ProductRestController {
 		product = productService.updateProduct(product);
 		responseMap.put("product", product);
 		
+		responseMap.put("menu", "manage");
+		responseMap.put("fnc", "update");
+		
 		return responseMap;
 	}
 	
@@ -290,7 +296,50 @@ public class ProductRestController {
 		product = productService.addProduct(product);
 		responseMap.put("product", product);
 		
+		responseMap.put("menu", "manage");
+		responseMap.put("fnc", "add");
+		
 		return responseMap;
+	}
+	
+	
+	// 최근 본 상품
+	@RequestMapping("/history")
+	public String history(HttpServletRequest request) {
+		
+		System.out.println("Rest /history Controller");
+		
+		Map<String, Object> responseMap = new HashMap<String, Object>();
+		
+		String historys[] = null;
+		List<Product> productList = new ArrayList<Product>();
+		
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null && cookies.length > 0) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("history")) {
+					historys = (cookie.getValue().trim()).split("&");
+				}
+			}
+		}
+		
+		if (historys != null) {
+			for (String prodNo : historys) {
+			Product product = productService.getProduct(Integer.parseInt(prodNo));
+			
+				if (product.getProTranCode().equals("1")) {
+					productList.add(product);
+				}
+			
+			}
+		}
+		
+		System.out.println(productList);
+		
+		responseMap.put("list", productList);
+		responseMap.put("tranCodeMap", TranCodeMapper.getInstance().getMap());
+		
+		return "responseMap";
 	}
 
 }
